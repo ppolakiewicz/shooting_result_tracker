@@ -1,0 +1,26 @@
+server:
+  port: 8881
+
+srt:
+  security:
+    jwt:
+      token:
+        algorithm:
+          secret: 2572743A43C95DC42F5733EC452EF7CAD3A55CD9477CCAAE94DA
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/DB_SRT
+    username: u_srt
+    password: p_srt
+
+  flyway:
+    clean-on-validation-error: true
+    default-schema: srt
+  jpa:
+    properties:
+      hibernate:
+        default_schema: srt
+    hibernate:
+      ddl-auto: none
+    show-sql: true

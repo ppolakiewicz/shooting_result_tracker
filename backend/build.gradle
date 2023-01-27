@@ -1,7 +1,17 @@
 plugins {
+    id 'groovy'
     id 'java'
     id 'org.springframework.boot' version '3.0.2'
     id 'io.spring.dependency-management' version '1.1.0'
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=spring',
+            '-Amapstruct.defaultInjectionStrategy=constructor',
+            '-Amapstruct.unmappedTargetPolicy=warn',
+            '-Amapstruct.unmappedSourcePolicy=warn'
+    ]
 }
 
 group = 'com.str'
@@ -19,31 +29,36 @@ repositories {
 }
 
 ext {
-    testcontainersVersion='1.17.6'
-    mapstructVersion='1.5.2.Final'
-    spockVersion='2.3-groovy-4.0'
+    testcontainersVersion = '1.17.6'
+    mapstructVersion = '1.5.2.Final'
+    spockVersion = '2.4-M1-groovy-4.0'
 }
-
 
 
 dependencies {
 
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
     implementation 'org.flywaydb:flyway-core'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+
+    implementation 'com.auth0:java-jwt:4.2.2'
 
     compileOnly 'org.projectlombok:lombok'
 
     runtimeOnly 'org.postgresql:postgresql'
 
+    annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testImplementation "org.spockframework:spock-spring:${spockVersion}"
     testImplementation "org.spockframework:spock-core:${spockVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation "org.testcontainers:spock"
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
 }
