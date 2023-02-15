@@ -1,9 +1,10 @@
-package com.str.shootingresulttracker.infrastructure.user.config;
+package com.str.shootingresulttracker.infrastructure.user;
 
-import com.str.shootingresulttracker.domain.user.UserRepository;
-import com.str.shootingresulttracker.domain.user.UserService;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import srt.user.UserRepository;
+import srt.user.UserService;
 
 @Configuration
 class UserConfiguration {

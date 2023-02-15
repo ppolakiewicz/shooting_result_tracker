@@ -2,10 +2,10 @@ package com.str.shootingresulttracker.configuration.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.str.shootingresulttracker.domain.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import srt.user.User;
 
 import java.util.Date;
 

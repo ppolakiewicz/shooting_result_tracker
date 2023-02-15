@@ -1,12 +1,12 @@
 package com.str.shootingresulttracker.adapter.api.auth;
 
 import com.str.shootingresulttracker.configuration.security.JwtService;
-import com.str.shootingresulttracker.domain.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import srt.user.UserService;
 
 @Service
 @AllArgsConstructor

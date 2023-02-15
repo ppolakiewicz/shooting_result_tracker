@@ -1,9 +1,9 @@
 package com.str.shootingresulttracker.infrastructure.user;
 
-import com.str.shootingresulttracker.domain.user.User;
-import com.str.shootingresulttracker.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import srt.user.User;
+import srt.user.UserRepository;
 
 import java.util.Optional;
 import java.util.UUID;

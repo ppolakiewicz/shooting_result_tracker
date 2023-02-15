@@ -1,1 +1,4 @@
-rootProject.name = 'ShootingResultTracker'
+rootProject.name = 'Shooting result tracker'
+
+include(':domain')
+project(':domain').projectDir = new File('../domain')

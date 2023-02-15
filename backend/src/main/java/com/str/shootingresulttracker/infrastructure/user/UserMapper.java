@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker.infrastructure.user;
 
-import com.str.shootingresulttracker.domain.user.User;
 import org.mapstruct.Mapper;
+import srt.user.User;
 
 @Mapper
 interface UserMapper {

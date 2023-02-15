@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'groovy'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    spockVersion = '2.4-M1-groovy-4.0'
+}
+
+dependencies {
+    testImplementation "org.spockframework:spock-core:${spockVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}

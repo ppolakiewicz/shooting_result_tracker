@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.user;
+package srt.user;
 
 import java.util.UUID;
 
