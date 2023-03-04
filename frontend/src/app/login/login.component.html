@@ -1,0 +1,22 @@
+<div>
+  <mat-card>
+    <mat-card-header>Login to this app !</mat-card-header>
+    <mat-card-content>
+      <ng-form [formGroup]="loginForm">
+        <mat-form-field>
+          <mat-label>Gimme email</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Gimme that password</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+      </ng-form>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="login()">LOGIN !!!</button>
+        <button mat-raised-button color="accent" (click)="register()">First register</button>
+        <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

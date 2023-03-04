@@ -19,7 +19,7 @@ public class JwtService {
 
 
     public JwtService(
-            @Value("${core.security.jwt.token.expire-time-in-second:3600}") int tokenExpireTimeInSecond,
+            @Value("${srt.security.jwt.token.expire-time-in-second:3600}") int tokenExpireTimeInSecond,
             JwtAlgorithmProvider jwtAlgorithmProvider) {
 
         this.tokenExpireTimeInSecond = tokenExpireTimeInSecond;
@@ -28,14 +28,14 @@ public class JwtService {
 
     public String generateToken(User user) {
 
-        String[] permissions = {user.getRole().toString()};
+        var currentTimeMillis = currentTimeMillis();
 
         return JWT.create()
                 .withSubject(user.getEmail())
                 .withClaim("active", user.isActive())
-                .withArrayClaim("permissions", permissions)
-                .withIssuedAt(new Date(currentTimeMillis()))
-                .withExpiresAt(new Date(currentTimeMillis() + tokenExpireTimeInSecond * 1_000L))
+                .withClaim("role", user.getRole().toString())
+                .withIssuedAt(new Date(currentTimeMillis))
+                .withExpiresAt(new Date(currentTimeMillis + tokenExpireTimeInSecond * 1_000L))
                 .sign(jwtAlgorithmProvider.provide());
     }
 

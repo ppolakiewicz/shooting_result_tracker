@@ -1,0 +1,14 @@
+mat-card{
+  width: 400px;
+  display: flex;
+  vertical-align: center;
+  margin: 15% auto auto;
+}
+
+mat-card-header{
+  color: aqua;
+}
+
+mat-form-field{
+  display: flex;
+}

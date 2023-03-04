@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 class JwtAlgorithmProvider {
 
-    @Value("{srt.security.jwt.token.algorithm.secret}")
+    @Value("${srt.security.jwt.token.algorithm.secret}")
     private String algorithmSecret;
 
     public Algorithm provide(){

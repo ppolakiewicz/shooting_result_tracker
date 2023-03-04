@@ -5,8 +5,10 @@ srt:
   security:
     jwt:
       token:
+        expire-time-in-second: 3600
         algorithm:
           secret: ${JWT_SECRET}
+
 
 spring:
 
