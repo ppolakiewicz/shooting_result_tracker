@@ -31,9 +31,9 @@ public class JwtService {
         var currentTimeMillis = currentTimeMillis();
 
         return JWT.create()
-                .withSubject(user.getEmail())
-                .withClaim("active", user.isActive())
-                .withClaim("role", user.getRole().toString())
+                .withSubject(user.email())
+                .withClaim("active", user.active())
+                .withClaim("role", user.role().toString())
                 .withIssuedAt(new Date(currentTimeMillis))
                 .withExpiresAt(new Date(currentTimeMillis + tokenExpireTimeInSecond * 1_000L))
                 .sign(jwtAlgorithmProvider.provide());

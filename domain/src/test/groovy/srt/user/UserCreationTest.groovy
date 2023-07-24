@@ -13,10 +13,10 @@ class UserCreationTest extends Specification {
             User user = User.newBasicUser(email, password)
 
         then:
-            user.getEmail() == email
-            user.getPassword() == password
-            user.getRole() == User.Role.USER
-            user.getId() != null
+            user.email() == email
+            user.password() == password
+            user.role() == User.Role.USER
+            user.id() != null
     }
 
 }

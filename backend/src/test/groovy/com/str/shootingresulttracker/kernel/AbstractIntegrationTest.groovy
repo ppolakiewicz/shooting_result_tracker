@@ -3,6 +3,7 @@ package com.str.shootingresulttracker.kernel
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
@@ -14,11 +15,8 @@ import spock.lang.Specification
 abstract class AbstractIntegrationTest extends Specification {
 
     private static final DockerImageName POSTGRES_DOCKER_IMAGE = DockerImageName.parse('postgres:15.1-alpine3.17')
-
-    private static final PostgreSQLContainer POSTGRES_CONTAINER = new PostgreSQLContainer(POSTGRES_DOCKER_IMAGE)
-
-    @Shared
-    PostgreSQLContainer postgreSQLContainer = POSTGRES_CONTAINER
+    private static final GenericContainer POSTGRES_CONTAINER = new PostgreSQLContainer(POSTGRES_DOCKER_IMAGE)
+            .withReuse(true)
 
     @DynamicPropertySource
     static void registerPostgresProperties(DynamicPropertyRegistry registry){

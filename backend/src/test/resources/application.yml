@@ -1,0 +1,6 @@
+srt:
+  security:
+    jwt:
+      token:
+        algorithm:
+          secret: 2572743A43C95DC42F5733EC452EF7CAD3A55CD9477CCAAE94DA
