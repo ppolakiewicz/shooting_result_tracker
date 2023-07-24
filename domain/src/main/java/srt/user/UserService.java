@@ -11,15 +11,14 @@ public class UserService {
     public User create(String email, String password) {
 
         if (userRepository.findUserByEmailIgnoreCase(email).isPresent()) {
-            //TODO: throw exception
+            throw new UserAlreadyExistsException(email);
         }
 
         return userRepository.save(User.newBasicUser(email, password));
     }
 
-    public User findByEmail(String email){
-        //TODO: Add domain exception
+    public User findByEmail(String email) {
         return userRepository.findUserByEmailIgnoreCase(email)
-                .orElseThrow();
+                .orElseThrow(() -> new UserDoNotExistsException(email));
     }
 }

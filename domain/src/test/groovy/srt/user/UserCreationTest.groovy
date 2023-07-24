@@ -2,7 +2,7 @@ package srt.user
 
 import spock.lang.Specification
 
-class UserTest extends Specification {
+class UserCreationTest extends Specification {
 
     void 'when creating new basic user then user should have id, rule USER and be active'() {
         given:
