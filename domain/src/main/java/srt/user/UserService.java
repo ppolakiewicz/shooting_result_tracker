@@ -1,24 +1,26 @@
 package srt.user;
 
+import lombok.AllArgsConstructor;
+import srt.kernel.Result;
+
+@AllArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public User create(String email, String password) {
+    public Result<UserAlreadyExistsError, User> create(String email, String password) {
 
         if (userRepository.findUserByEmailIgnoreCase(email).isPresent()) {
-            throw new UserAlreadyExistsException(email);
+            return new Result<>(new UserAlreadyExistsError(email));
         }
 
-        return userRepository.save(User.newBasicUser(email, password));
+        return new Result<>(userRepository.save(User.newBasicUser(email, password)));
     }
 
-    public User findByEmail(String email) {
+    public Result<UserDoNotExistsError, User> findByEmail(String email) {
         return userRepository.findUserByEmailIgnoreCase(email)
-                .orElseThrow(() -> new UserDoNotExistsException(email));
+                .<Result<UserDoNotExistsError, User>>map(Result::new)
+                .orElseGet(() -> new Result<>(new UserDoNotExistsError(email)));
     }
+
 }

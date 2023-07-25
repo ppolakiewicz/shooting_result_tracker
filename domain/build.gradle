@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'groovy'
+    id "io.freefair.lombok" version "8.1.0"
 }
 
 group 'org.example'
@@ -15,6 +16,9 @@ ext {
 }
 
 dependencies {
+    implementation 'org.slf4j:slf4j-simple:2.0.5'
+    implementation 'org.slf4j:slf4j-api:2.0.5'
+
     testImplementation "org.spockframework:spock-core:${spockVersion}"
 }
 
