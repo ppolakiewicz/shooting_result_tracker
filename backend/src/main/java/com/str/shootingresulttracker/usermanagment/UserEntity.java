@@ -5,6 +5,13 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import org.hibernate.type.descriptor.jdbc.JsonJdbcType;
+
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Entity
@@ -19,16 +26,16 @@ class UserEntity extends AbstractBaseEntity {
     public String password;
 
     @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    public UserRole role;
+    @JdbcTypeCode(SqlTypes.JSON)
+    public Collection<UserRole> roles;
 
     @Column(name = "active")
     public boolean active;
 
-    public UserEntity(String username, String password, UserRole role, boolean active) {
+    public UserEntity(String username, String password, Collection<UserRole> roles, boolean active) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
         this.active = active;
     }
 
@@ -36,7 +43,7 @@ class UserEntity extends AbstractBaseEntity {
         return new UserEntity(
                 username,
                 password,
-                UserRole.USER,
+                List.of(UserRole.USER),
                 true
         );
     }

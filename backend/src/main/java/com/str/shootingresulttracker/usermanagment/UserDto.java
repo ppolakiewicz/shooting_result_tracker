@@ -7,33 +7,24 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
+@Getter
 @AllArgsConstructor
-public class UserDto implements UserDetails{
+public class UserDto implements UserDetails {
 
-    @Getter
     private final UUID id;
 
     private final String username;
     private final String password;
-    private final UserRole role;
+    private final Collection<UserRole> roles;
     private final boolean active;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.toString()));
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.toString()))
+                .toList();
     }
 
     @Override

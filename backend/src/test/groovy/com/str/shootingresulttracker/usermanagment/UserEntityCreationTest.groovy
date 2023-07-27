@@ -15,7 +15,7 @@ class UserEntityCreationTest extends Specification {
         then:
             user.getUsername() == username
             user.getPassword() == password
-            user.getRole() == UserRole.USER
+            user.getRoles() == [UserRole.USER]
     }
 
 }
