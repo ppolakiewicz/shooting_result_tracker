@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.configuration.security.config;
 
-import com.str.shootingresulttracker.infrastructure.user.UserJpaRepository;
+import com.str.shootingresulttracker.usermanagment.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +11,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @AllArgsConstructor
 class UserDetailsServiceConfiguration {
 
-    private final UserJpaRepository userJpaRepository;
+    private final UserService userService;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userJpaRepository.findByEmailIgnoreCase(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User" + username + "do not exists"));
+        return username -> userService.findByUserName(username)
+                .orElseThrow(userDoNotExistsError -> new UsernameNotFoundException("User" + username + "do not exists"));
     }
-
 }
+

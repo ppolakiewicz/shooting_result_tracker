@@ -1,4 +1,0 @@
-rootProject.name = 'Shooting result tracker'
-
-include('domain')
-include('backend')

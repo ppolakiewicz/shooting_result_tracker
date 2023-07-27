@@ -2,10 +2,10 @@ package com.str.shootingresulttracker.configuration.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.str.shootingresulttracker.usermanagment.UserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import srt.user.User;
 
 import java.util.Date;
 
@@ -26,14 +26,17 @@ public class JwtService {
         this.jwtAlgorithmProvider = jwtAlgorithmProvider;
     }
 
-    public String generateToken(User user) {
+    public String generateToken(UserDto userDto) {
 
         var currentTimeMillis = currentTimeMillis();
 
         return JWT.create()
-                .withSubject(user.email())
-                .withClaim("active", user.active())
-                .withClaim("role", user.role().toString())
+                .withSubject(userDto.getUsername())
+                .withClaim("active", userDto.isEnabled())
+                .withArrayClaim("grantedAuthorities", userDto.getAuthorities().stream()
+                        .map(Object::toString)
+                        .toArray(String[]::new)
+                )
                 .withIssuedAt(new Date(currentTimeMillis))
                 .withExpiresAt(new Date(currentTimeMillis + tokenExpireTimeInSecond * 1_000L))
                 .sign(jwtAlgorithmProvider.provide());
