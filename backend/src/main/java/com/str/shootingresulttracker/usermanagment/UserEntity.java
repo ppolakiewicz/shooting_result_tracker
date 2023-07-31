@@ -1,14 +1,14 @@
 package com.str.shootingresulttracker.usermanagment;
 
 import com.str.shootingresulttracker.kernel.AbstractBaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.JsonJdbcType;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,17 +20,17 @@ import java.util.List;
 class UserEntity extends AbstractBaseEntity {
 
     @Column(name = "username")
-    public String username;
+    private String username;
 
     @Column(name = "password")
-    public String password;
+    private String password;
 
     @Column(name = "role")
     @JdbcTypeCode(SqlTypes.JSON)
-    public Collection<UserRole> roles;
+    private Collection<UserRole> roles;
 
     @Column(name = "active")
-    public boolean active;
+    private boolean active;
 
     public UserEntity(String username, String password, Collection<UserRole> roles, boolean active) {
         this.username = username;
