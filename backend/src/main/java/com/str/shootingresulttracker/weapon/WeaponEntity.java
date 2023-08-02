@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 
 @Getter
 @Entity
-@Table("weapon")
+@Table(name = "weapon")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WeaponEntity extends AbstractBaseEntity {
 
