@@ -1,0 +1,1 @@
+alter table weapon add create_date timestamp with time zone;

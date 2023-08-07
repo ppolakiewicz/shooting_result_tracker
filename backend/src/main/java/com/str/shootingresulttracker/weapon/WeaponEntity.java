@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Clock;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -34,12 +35,24 @@ public class WeaponEntity extends AbstractBaseEntity {
     @Column(name = "purchase_date")
     private OffsetDateTime purchaseDate;
 
-    public WeaponEntity(String name, WeaponType type, Caliber caliber, String model, OffsetDateTime productionDate, OffsetDateTime purchaseDate) {
+    @Column(name = "create_date")
+    private OffsetDateTime createDate;
+
+    public WeaponEntity(
+            String name,
+            WeaponType type,
+            Caliber caliber,
+            String model,
+            OffsetDateTime productionDate,
+            OffsetDateTime purchaseDate,
+            Clock clock) {
+
         this.name = name;
         this.type = type;
         this.caliber = caliber;
         this.model = model;
         this.productionDate = productionDate;
         this.purchaseDate = purchaseDate;
+        this.createDate = OffsetDateTime.now(clock);
     }
 }
