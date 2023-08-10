@@ -9,7 +9,7 @@ import java.time.Clock;
 
 @MappedSuperclass
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AbstractBaseAggregate extends AbstractBaseEntity {
+public abstract class AbstractBaseAggregate extends AbstractBaseEntity {
 
     @Version
     private Long version;
