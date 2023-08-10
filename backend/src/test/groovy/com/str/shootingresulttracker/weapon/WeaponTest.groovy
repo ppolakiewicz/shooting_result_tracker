@@ -8,7 +8,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-class WeaponEntityTest extends Specification {
+class WeaponTest extends Specification {
 
     void 'when weapon is created then creation date should be set based on provided clock'() {
         given:
@@ -16,7 +16,7 @@ class WeaponEntityTest extends Specification {
             Clock clock = new MutableClock(defaultTime)
 
         when:
-            WeaponEntity weapon = new WeaponEntity(
+            Weapon weapon = new Weapon(
                     'Test',
                     WeaponType.PISTOL,
                     Caliber.ACP_45,
@@ -27,6 +27,6 @@ class WeaponEntityTest extends Specification {
             )
 
         then:
-            weapon.getCreateDate().toZonedDateTime().isEqual(defaultTime)
+            weapon.getCreationDate().toZonedDateTime().isEqual(defaultTime)
     }
 }

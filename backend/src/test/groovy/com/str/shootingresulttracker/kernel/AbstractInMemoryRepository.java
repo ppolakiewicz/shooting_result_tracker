@@ -1,7 +1,9 @@
 package com.str.shootingresulttracker.kernel;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -189,15 +192,34 @@ abstract public class AbstractInMemoryRepository<T extends AbstractBaseEntity> i
         throw new OperationNotSupportedInRepository("Implement this if needed");
     }
 
+    @SneakyThrows
     private void setId(T object) {
-        try {
-            var idField = object.getClass().getField("id");
-            idField.setAccessible(true);
-            idField.set(object, UUID.randomUUID());
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            log.error("Could not read object ID");
-            throw new RuntimeException(e);
+        var idFieldName = "id";
+        Field field = getIdField(object, idFieldName);
+        // walked to the top of class hierarchy without finding field
+        if (field == null) {
+            throw new NoSuchFieldException("No such field like: " + idFieldName);
+        } else {
+            field.setAccessible(true);
+            field.set(object, UUID.randomUUID());
         }
+    }
+
+    @Nullable
+    private <E extends AbstractBaseEntity> Field getIdField(E object, String idFieldName) {
+        Class<?> currentClass = object.getClass();
+        Field field = null;
+        //We need to iterate throught class hierarchy to find base class that stores id
+        //stop when we got field or reached top of class hierarchy
+        while (field == null && currentClass != null) {
+            try {
+                field = currentClass.getDeclaredField(idFieldName);
+            } catch (NoSuchFieldException e) {
+                // only get super-class when we couldn't find field
+                currentClass = currentClass.getSuperclass();
+            }
+        }
+        return field;
     }
 
 }

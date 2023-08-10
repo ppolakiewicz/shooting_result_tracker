@@ -2,36 +2,34 @@ package com.str.shootingresulttracker.kernel;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-public class Result<E, T extends AbstractBaseDomainError> {
+public class Result<V, E extends AbstractBaseDomainError> {
 
-    private final T error;
-    private final E value;
+    private final V value;
+    private final E error;
 
-    public Result(T error) {
+    public Result(E error) {
         Objects.requireNonNull(error, "Result can not have null error");
         this.error = error;
         this.value = null;
     }
 
-    public Result(E value) {
+    public Result(V value) {
         Objects.requireNonNull(value, "Result can not have null value");
         this.error = null;
         this.value = value;
     }
 
-    public Optional<T> getError() {
+    public Optional<E> getError() {
         return Optional.ofNullable(error);
     }
 
-    public Optional<E> getValue() {
+    public Optional<V> getValue() {
         return Optional.ofNullable(value);
     }
 
-    public <U> Result<U, T> mapValue(Function<? super E, ? extends U> mapper) {
+    public <U> Result<U, E> mapValue(Function<? super V, ? extends U> mapper) {
         Objects.requireNonNull(mapper);
         if (getError().isPresent()) {
             return new Result<>(error);
@@ -40,7 +38,7 @@ public class Result<E, T extends AbstractBaseDomainError> {
         }
     }
 
-    public <X extends Throwable> E orElseThrow(Function<T, ? extends X> exceptionProvider) throws X {
+    public <X extends Throwable> V orElseThrow(Function<E, ? extends X> exceptionProvider) throws X {
         if (value != null) {
             return value;
         } else {
