@@ -1,0 +1,1 @@
+alter table srt_magazine add column weapon_count numeric not null;

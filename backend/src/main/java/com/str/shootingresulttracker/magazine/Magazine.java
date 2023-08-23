@@ -36,7 +36,11 @@ public class Magazine extends AbstractBaseAggregate {
     @Column(name = "capacity")
     private int capacity;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull
+    @Column(name = "weapon_count")
+    private int weaponCount;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Weapon> weapons;
 
     @JdbcTypeCode(SqlTypes.JSON)
@@ -51,6 +55,7 @@ public class Magazine extends AbstractBaseAggregate {
         this.name = name;
         this.ownerId = ownerId;
         this.capacity = DEFAULT_CAPACITY;
+        this.weaponCount = 0;
         this.weapons = new HashSet<>();
         this.ammunitions = new HashSet<>();
     }
@@ -72,6 +77,8 @@ public class Magazine extends AbstractBaseAggregate {
 
         this.weapons.add(weapon);
         weapon.setMagazine(this);
+        this.weaponCount++;
+
         return new Result<>(true);
     }
 
@@ -118,7 +125,7 @@ public class Magazine extends AbstractBaseAggregate {
     }
 
     private boolean isMagazineFull() {
-        return capacity == weapons.size();
+        return capacity >= weaponCount;
     }
 
     private void replaceAmmunition(Ammunition current, Ammunition newValue) {
