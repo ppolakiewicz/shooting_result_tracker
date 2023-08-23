@@ -84,6 +84,8 @@ public class Magazine extends AbstractBaseAggregate {
 
     public Result<Boolean, AmmunitionQuantityError> addAmmunition(Ammunition addedAmmunition) {
 
+        Objects.requireNonNull(addedAmmunition, "Added ammunition can not be null");
+
         var currentAmmunition = ammunitions.stream()
                 .filter(ammo -> ammo.caliber().equals(addedAmmunition.caliber()))
                 .findFirst()
@@ -102,6 +104,8 @@ public class Magazine extends AbstractBaseAggregate {
     }
 
     public Result<Boolean, AmmunitionQuantityError> subtractAmmunition(Ammunition subtractedAmmunition) {
+
+        Objects.requireNonNull(subtractedAmmunition, "Subtracted ammunition can not be null");
 
         var currentAmmunition = ammunitions.stream()
                 .filter(ammo -> ammo.caliber().equals(subtractedAmmunition.caliber()))
