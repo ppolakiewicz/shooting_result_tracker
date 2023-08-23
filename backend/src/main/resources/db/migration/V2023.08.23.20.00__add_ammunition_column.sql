@@ -1,0 +1,1 @@
+alter table srt_magazine add column ammunition json;

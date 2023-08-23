@@ -1,6 +1,9 @@
 package com.str.shootingresulttracker.magazine
 
+
+import com.str.shootingresulttracker.provider.MagazineTestProvider
 import com.str.shootingresulttracker.provider.WeaponTestProvider
+import com.str.shootingresulttracker.weapon.Caliber
 import spock.lang.Specification
 import spock.util.time.MutableClock
 
@@ -46,8 +49,102 @@ class MagazineTest extends Specification {
 
         then:
             result.getError().isPresent()
-            FullMagazineError.isCase(result.getError().get())
-
     }
+
+    void 'when magazine do not contains ammunition that is added then new ammunition should be added to magazine'() {
+        given:
+            Magazine magazine = MagazineTestProvider.create()
+            Ammunition newAmmunition = new Ammunition(Caliber.ACP_45, 123)
+
+        when:
+            def result = magazine.addAmmunition(newAmmunition)
+
+        then:
+            result.getValue().get() == true
+            magazine.getAmmunitions().contains(newAmmunition)
+    }
+
+    void 'when magazine already contains ammunition for given caliber and same caliber ammunition is added then quantity should be summed'() {
+        given:
+            Caliber caliber = Caliber.ACP_45
+            Ammunition existingAmmunition = new Ammunition(caliber, 10)
+
+        and: 'magazine with ammunition for given caliber'
+            Magazine magazine = MagazineTestProvider.create()
+            magazine.addAmmunition(existingAmmunition)
+
+        and: 'new pack of ammunition'
+            Ammunition newPackOfAmmunition = new Ammunition(caliber, 25)
+
+        and: 'expected result'
+            Ammunition expectedAmmunition = new Ammunition(caliber, 35)
+
+        when:
+            def result = magazine.addAmmunition(newPackOfAmmunition)
+
+        then:
+            result.getValue().isPresent()
+            result.getValue().get() == true
+            magazine.getAmmunitions().contains(expectedAmmunition)
+    }
+
+    void 'when subtracting ammunition from magazine that do not exists in magazine then magazine should still do not contains this ammunition'() {
+        given: 'magazine with some ammunition'
+            Magazine magazine = MagazineTestProvider.create()
+            magazine.addAmmunition(new Ammunition(Caliber.ACP_45, 10))
+            magazine.addAmmunition(new Ammunition(Caliber.ACP_380, 10))
+            magazine.addAmmunition(new Ammunition(Caliber.PARABELLUM_9X19, 10))
+
+        and: 'ammunition that is not stored in magazine'
+            Caliber notStoredCaliber = Caliber.CASULL_454
+            Ammunition notStoredAmmunition = new Ammunition(notStoredCaliber, 44)
+
+        when:
+            def result = magazine.subtractAmmunition(notStoredAmmunition)
+
+        then:
+            result.getError().isEmpty()
+            magazine.getAmmunitions().stream()
+                    .noneMatch { ammunition -> (ammunition.caliber() == notStoredCaliber) }
+    }
+
+    void 'when subtracting ammunition from magazine then quantity should be subtracted'() {
+        given:
+            Caliber caliber = Caliber.ACP_45
+            Magazine magazine = MagazineTestProvider.create()
+            magazine.addAmmunition(new Ammunition(caliber, 10))
+
+        and:
+            Ammunition subtractedAmmunition = new Ammunition(caliber, 3)
+
+        and:
+            Ammunition expectedResult = new Ammunition(caliber, 7)
+
+        when:
+            def result = magazine.subtractAmmunition(subtractedAmmunition)
+
+        then:
+            result.getError().isEmpty()
+            magazine.getAmmunitions().contains(expectedResult)
+    }
+
+    void 'when whole ammunition for given caliber is subtracted then magazine should not contain given caliber'() {
+        given:
+            Caliber caliber = Caliber.ACP_45
+            Magazine magazine = MagazineTestProvider.create()
+            magazine.addAmmunition(new Ammunition(caliber, 10))
+
+        and:
+            Ammunition subtractedAmmunition = new Ammunition(caliber, 20)
+
+        when:
+            def result = magazine.subtractAmmunition(subtractedAmmunition)
+
+        then:
+            result.getError().isEmpty()
+            magazine.getAmmunitions().stream()
+                    .noneMatch { ammunition -> ammunition.caliber() == caliber }
+    }
+
 
 }

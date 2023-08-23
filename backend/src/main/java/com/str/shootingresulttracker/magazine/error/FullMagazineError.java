@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.magazine;
+package com.str.shootingresulttracker.magazine.error;
 
 import com.str.shootingresulttracker.kernel.AbstractBaseDomainError;
 
