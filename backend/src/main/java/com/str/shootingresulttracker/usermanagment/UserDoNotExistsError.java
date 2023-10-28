@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.usermanagment;
 
-import com.str.shootingresulttracker.kernel.AbstractBaseDomainError;
+import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainError;
 
 public class UserDoNotExistsError extends AbstractBaseDomainError {
 

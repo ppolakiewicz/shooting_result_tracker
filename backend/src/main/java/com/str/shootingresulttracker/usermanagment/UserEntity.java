@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.usermanagment;
 
-import com.str.shootingresulttracker.kernel.AbstractBaseEntity;
+import com.str.shootingresulttracker.core.AbstractBaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.usermanagment;
 
-import com.str.shootingresulttracker.kernel.AbstractInMemoryRepository;
+import com.str.shootingresulttracker.core.AbstractInMemoryRepository;
 
 import java.util.Optional;
 

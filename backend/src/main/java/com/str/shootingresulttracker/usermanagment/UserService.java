@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker.usermanagment;
 
+import com.str.shootingresulttracker.domain.kernel.Result;
 import lombok.AllArgsConstructor;
-import com.str.shootingresulttracker.kernel.Result;
 import org.springframework.stereotype.Service;
 
 @Service

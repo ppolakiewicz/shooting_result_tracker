@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker
 
 
-import com.str.shootingresulttracker.kernel.AbstractIntegrationTest
+import com.str.shootingresulttracker.core.AbstractIntegrationTest
 
 class BackendApplicationTests extends AbstractIntegrationTest {
 
