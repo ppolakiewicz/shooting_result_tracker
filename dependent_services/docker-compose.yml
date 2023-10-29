@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  srt-postgres-database:
+    container_name: srt-database
+    image: postgres:15-alpine3.17
+    restart: always
+    ports:
+      - 5433:5432
+    volumes:
+      - ./data/postgresDB/:/var/lib/postgresql/data
+      - ./config/init/:/docker-entrypoint-initdb.d
+    env_file:
+      - ./postgres.env
+
+  prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./config/grafana/:/etc/grafana/provisioning/datasources

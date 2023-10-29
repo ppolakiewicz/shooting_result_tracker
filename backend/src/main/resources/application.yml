@@ -9,9 +9,7 @@ srt:
         algorithm:
           secret: ${JWT_SECRET}
 
-
 spring:
-
   datasource:
     url: jdbc:${DB_URL}
     username: ${DB_USERNAME}
@@ -22,6 +20,10 @@ spring:
       hibernate:
         default_schema: ${DB_SCHEMA}
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
     hibernate:
       ddl-auto: none
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["prometheus"]
