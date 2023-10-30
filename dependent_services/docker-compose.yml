@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  srt-postgres-database:
-    container_name: srt-database
+  postgres:
+    container_name: postgres
     image: postgres:15-alpine3.17
-    restart: always
+    restart: unless-stopped
     ports:
-      - 5433:5432
+      - "5433:5432"
     volumes:
       - ./data/postgresDB/:/var/lib/postgresql/data
       - ./config/init/:/docker-entrypoint-initdb.d
@@ -16,6 +16,7 @@ services:
   prometheus:
     image: prom/prometheus:v2.47.2
     container_name: prometheus
+    restart: unless-stopped
     ports:
       - "9090:9090"
     volumes:
@@ -29,3 +30,11 @@ services:
     restart: unless-stopped
     volumes:
       - ./config/grafana/:/etc/grafana/provisioning/datasources
+      - ./data/grafana-storage:/var/lib/grafana
+
+  loki:
+    image: grafana/loki:2.8.2
+    container_name: loki
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
