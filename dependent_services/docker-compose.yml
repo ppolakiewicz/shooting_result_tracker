@@ -20,7 +20,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
 
   grafana:
     image: grafana/grafana:10.2.0
@@ -38,3 +38,15 @@ services:
     restart: unless-stopped
     ports:
       - "3100:3100"
+    volumes:
+      - ./data/loki-storage:/data/loki
+
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: promtail
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail.yaml
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./data/promtail-storage:/var/log
+      - ./config/promtail:/etc/promtail
