@@ -20,7 +20,8 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./config/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      #This config file must be prometheus.yml cause this is default config file name for prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
     image: grafana/grafana:10.2.0
@@ -33,13 +34,13 @@ services:
       - ./data/grafana-storage:/var/lib/grafana
 
   loki:
-    image: grafana/loki:2.8.2
+    image: grafana/loki:2.9.2
     container_name: loki
     restart: unless-stopped
     ports:
       - "3100:3100"
-    volumes:
-      - ./data/loki-storage:/data/loki
+    command:
+      -config.file=/etc/loki/local-config.yaml
 
   promtail:
     image: grafana/promtail:2.9.2
@@ -47,6 +48,5 @@ services:
     restart: unless-stopped
     command: -config.file=/etc/promtail/promtail.yaml
     volumes:
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./data/promtail-storage:/var/log
+      - ./data/logs:/var/log
       - ./config/promtail:/etc/promtail
