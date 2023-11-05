@@ -1,12 +1,14 @@
 package com.str.shootingresulttracker.core;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.Clock;
@@ -23,9 +25,14 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractBaseEntity {
 
+    private static final String GENERATOR_NAME = "ulid-generator";
+
     @Id
     @Column(name = "id")
-    @UuidGenerator
+    //Generates ULID instead of UUID based on this article
+    //https://www.cybertec-postgresql.com/en/unexpected-downsides-of-uuid-keys-in-postgresql/
+    @GeneratedValue(generator = GENERATOR_NAME)
+    @GenericGenerator(name = GENERATOR_NAME, type = ULIDGenerator.class)
     private UUID id;
 
     @NotNull
