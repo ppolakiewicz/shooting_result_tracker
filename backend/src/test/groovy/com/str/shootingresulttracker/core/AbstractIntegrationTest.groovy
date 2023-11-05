@@ -11,7 +11,7 @@ import spock.lang.Specification
 
 @Testcontainers
 @SpringBootTest
-abstract class AbstractIntegrationTest extends Specification {
+abstract class AbstractIntegrationTest extends AbstractUnitTest {
 
     private static final DockerImageName POSTGRES_DOCKER_IMAGE = DockerImageName.parse('postgres:15.1-alpine3.17')
     private static final GenericContainer POSTGRES_CONTAINER = new PostgreSQLContainer(POSTGRES_DOCKER_IMAGE)

@@ -1,0 +1,1 @@
+alter table srt_weapon rename column creation_date to create_date;

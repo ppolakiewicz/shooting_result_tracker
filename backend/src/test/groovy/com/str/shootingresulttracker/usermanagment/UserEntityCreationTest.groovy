@@ -1,8 +1,8 @@
 package com.str.shootingresulttracker.usermanagment
 
-import spock.lang.Specification
+import com.str.shootingresulttracker.core.AbstractUnitTest
 
-class UserEntityCreationTest extends Specification {
+class UserEntityCreationTest extends AbstractUnitTest {
 
     void 'when creating new basic user then user should have provided password and username, rule USER and be active'() {
         given:
@@ -10,7 +10,7 @@ class UserEntityCreationTest extends Specification {
             String username = 'email'
 
         when:
-            UserEntity user = UserEntity.newBasicUser(username, password)
+            UserEntity user = UserEntity.newBasicUser(username, password, clock)
 
         then:
             user.getUsername() == username

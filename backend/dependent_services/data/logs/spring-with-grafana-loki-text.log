@@ -1,0 +1,248 @@
+[INFO ] 2023-11-05 18:38:14.905 [Test worker]  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+[INFO ] 2023-11-05 18:38:15.152 [Test worker]  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+[INFO ] 2023-11-05 18:38:15.153 [Test worker]  o.t.DockerClientFactory - Docker host IP address is localhost
+[INFO ] 2023-11-05 18:38:15.165 [Test worker]  o.t.DockerClientFactory - Connected to docker: 
+  Server Version: 24.0.6
+  API Version: 1.43
+  Operating System: Docker Desktop
+  Total Memory: 32002 MB
+[INFO ] 2023-11-05 18:38:15.178 [Test worker]  d.3.4] - Creating container for image: testcontainers/ryuk:0.3.4
+[INFO ] 2023-11-05 18:38:15.288 [Test worker]  o.t.u.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+[INFO ] 2023-11-05 18:38:15.364 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 is starting: 5623b2075ae5537c1aa9f62aec87494434b76b0f88da4ebfe93318e52bd5f1d7
+[INFO ] 2023-11-05 18:38:15.798 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 started in PT0.6279564S
+[INFO ] 2023-11-05 18:38:15.802 [Test worker]  o.t.u.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+[INFO ] 2023-11-05 18:38:15.802 [Test worker]  o.t.DockerClientFactory - Checking the system...
+[INFO ] 2023-11-05 18:38:15.802 [Test worker]  o.t.DockerClientFactory - ?? Docker server version should be at least 1.6.0
+[INFO ] 2023-11-05 18:38:15.803 [Test worker]  d.1.17] - Creating container for image: postgres:15.1-alpine3.17
+[WARN ] 2023-11-05 18:38:15.804 [Test worker]  d.1.17] - Reuse was requested but the environment does not support the reuse of containers
+To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at C:\Users\Pawel\.testcontainers.properties
+[INFO ] 2023-11-05 18:38:15.840 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 is starting: f20981b3bfb049769ba82b43113625cd1b4d6be3aa1cc4b6fac36cd5971bc4e5
+[INFO ] 2023-11-05 18:38:17.583 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 started in PT1.7798903S
+[INFO ] 2023-11-05 18:38:17.607 [Test worker]  c.s.s.BackendApplicationTests - Starting BackendApplicationTests using Java 20.0.2.1 with PID 7364 (started by Pawe³ in C:\Repozytoria\shooting_result_tracker\backend)
+[INFO ] 2023-11-05 18:38:17.608 [Test worker]  c.s.s.BackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2023-11-05 18:38:18.102 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2023-11-05 18:38:18.145 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 3 JPA repository interfaces.
+[INFO ] 2023-11-05 18:38:18.427 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+[INFO ] 2023-11-05 18:38:18.535 [Test worker]  c.z.h.p.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@9a37591
+[INFO ] 2023-11-05 18:38:18.538 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+[INFO ] 2023-11-05 18:38:18.585 [Test worker]  o.f.c.i.l.VersionPrinter - Flyway Community Edition 9.21.0 by Redgate
+[INFO ] 2023-11-05 18:38:18.585 [Test worker]  o.f.c.i.l.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+[INFO ] 2023-11-05 18:38:18.585 [Test worker]  o.f.c.i.l.VersionPrinter - 
+[INFO ] 2023-11-05 18:38:18.593 [Test worker]  o.f.c.i.d.b.BaseDatabaseType - Database: jdbc:postgresql://localhost:54771/test (PostgreSQL 15.1)
+[INFO ] 2023-11-05 18:38:18.616 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+[INFO ] 2023-11-05 18:38:18.618 [Test worker]  o.f.c.i.c.DbValidate - Successfully validated 10 migrations (execution time 00:00.012s)
+[INFO ] 2023-11-05 18:38:18.629 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+[INFO ] 2023-11-05 18:38:18.659 [Test worker]  o.f.c.i.c.DbMigrate - Current version of schema "public": << Empty Schema >>
+[INFO ] 2023-11-05 18:38:18.665 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.02.08.00.00 - add user table"
+[INFO ] 2023-11-05 18:38:18.688 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.02.22.30 - add weapon table"
+[INFO ] 2023-11-05 18:38:18.702 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.00 - add create date to weapon"
+[INFO ] 2023-11-05 18:38:18.713 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.30 - add magazine"
+[INFO ] 2023-11-05 18:38:18.725 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.10.21.00 - rename weapon table"
+[INFO ] 2023-11-05 18:38:18.735 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.20.00 - add ammunition column"
+[INFO ] 2023-11-05 18:38:18.745 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.21.30 - add weapon count to magazine"
+[INFO ] 2023-11-05 18:38:18.754 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.10.28.14.30 - add created by"
+[INFO ] 2023-11-05 18:38:18.764 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.13.30 - add create date to user table"
+[INFO ] 2023-11-05 18:38:18.773 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.14.00 - fix weapon create date column"
+[INFO ] 2023-11-05 18:38:18.782 [Test worker]  o.f.c.i.c.DbMigrate - Successfully applied 10 migrations to schema "public", now at version v2023.11.01.14.00 (execution time 00:00.036s)
+[INFO ] 2023-11-05 18:38:18.861 [Test worker]  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2023-11-05 18:38:18.900 [Test worker]  o.h.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+[INFO ] 2023-11-05 18:38:18.901 [Test worker]  o.h.c.Environment - HHH000406: Using bytecode reflection optimizer
+[INFO ] 2023-11-05 18:38:18.978 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:38:19.051 [Test worker]  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO ] 2023-11-05 18:38:19.217 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:38:19.610 [Test worker]  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2023-11-05 18:38:19.612 [Test worker]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:38:19.923 [Test worker]  o.s.d.j.r.q.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN ] 2023-11-05 18:38:20.343 [Test worker]  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2023-11-05 18:38:20.466 [Test worker]  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34341b2a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4e826e33, org.springframework.security.web.context.SecurityContextHolderFilter@24c186cc, org.springframework.security.web.header.HeaderWriterFilter@3f36d387, org.springframework.security.web.authentication.logout.LogoutFilter@2f38b35e, com.str.shootingresulttracker.configuration.security.JwtAuthenticationFilter@509d0d21, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5a78e7e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@623c62b9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7d66a634, org.springframework.security.web.session.SessionManagementFilter@28736857, org.springframework.security.web.access.ExceptionTranslationFilter@51645204, org.springframework.security.web.access.intercept.AuthorizationFilter@53b52f30]
+[INFO ] 2023-11-05 18:38:20.963 [Test worker]  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+[INFO ] 2023-11-05 18:38:21.006 [Test worker]  c.s.s.BackendApplicationTests - Started BackendApplicationTests in 6.444 seconds (process running for 7.332)
+[INFO ] 2023-11-05 18:38:21.597 [SpringApplicationShutdownHook]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:38:21.599 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[INFO ] 2023-11-05 18:38:21.603 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+[INFO ] 2023-11-05 18:39:00.937 [Test worker]  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+[INFO ] 2023-11-05 18:39:01.190 [Test worker]  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+[INFO ] 2023-11-05 18:39:01.191 [Test worker]  o.t.DockerClientFactory - Docker host IP address is localhost
+[INFO ] 2023-11-05 18:39:01.202 [Test worker]  o.t.DockerClientFactory - Connected to docker: 
+  Server Version: 24.0.6
+  API Version: 1.43
+  Operating System: Docker Desktop
+  Total Memory: 32002 MB
+[INFO ] 2023-11-05 18:39:01.214 [Test worker]  d.3.4] - Creating container for image: testcontainers/ryuk:0.3.4
+[INFO ] 2023-11-05 18:39:01.327 [Test worker]  o.t.u.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+[INFO ] 2023-11-05 18:39:01.409 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 is starting: c97897916e2a18a36b35ca0a27f0b641e7d73e90904aedc313a172bc4f15db40
+[INFO ] 2023-11-05 18:39:01.850 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 started in PT0.6424815S
+[INFO ] 2023-11-05 18:39:01.853 [Test worker]  o.t.u.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+[INFO ] 2023-11-05 18:39:01.853 [Test worker]  o.t.DockerClientFactory - Checking the system...
+[INFO ] 2023-11-05 18:39:01.854 [Test worker]  o.t.DockerClientFactory - ?? Docker server version should be at least 1.6.0
+[INFO ] 2023-11-05 18:39:01.854 [Test worker]  d.1.17] - Creating container for image: postgres:15.1-alpine3.17
+[WARN ] 2023-11-05 18:39:01.855 [Test worker]  d.1.17] - Reuse was requested but the environment does not support the reuse of containers
+To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at C:\Users\Pawel\.testcontainers.properties
+[INFO ] 2023-11-05 18:39:01.891 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 is starting: 8900dd25c2f9f25e71ba63420e30d3fa737e44cb256acefa596133a9b33cca87
+[INFO ] 2023-11-05 18:39:03.572 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 started in PT1.717325S
+[INFO ] 2023-11-05 18:39:03.596 [Test worker]  c.s.s.BackendApplicationTests - Starting BackendApplicationTests using Java 20.0.2.1 with PID 17896 (started by Pawe³ in C:\Repozytoria\shooting_result_tracker\backend)
+[INFO ] 2023-11-05 18:39:03.597 [Test worker]  c.s.s.BackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2023-11-05 18:39:04.087 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2023-11-05 18:39:04.128 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 3 JPA repository interfaces.
+[INFO ] 2023-11-05 18:39:04.413 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+[INFO ] 2023-11-05 18:39:04.520 [Test worker]  c.z.h.p.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@105fe81e
+[INFO ] 2023-11-05 18:39:04.523 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+[INFO ] 2023-11-05 18:39:04.566 [Test worker]  o.f.c.i.l.VersionPrinter - Flyway Community Edition 9.21.0 by Redgate
+[INFO ] 2023-11-05 18:39:04.566 [Test worker]  o.f.c.i.l.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+[INFO ] 2023-11-05 18:39:04.566 [Test worker]  o.f.c.i.l.VersionPrinter - 
+[INFO ] 2023-11-05 18:39:04.574 [Test worker]  o.f.c.i.d.b.BaseDatabaseType - Database: jdbc:postgresql://localhost:54790/test (PostgreSQL 15.1)
+[INFO ] 2023-11-05 18:39:04.596 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+[INFO ] 2023-11-05 18:39:04.599 [Test worker]  o.f.c.i.c.DbValidate - Successfully validated 10 migrations (execution time 00:00.012s)
+[INFO ] 2023-11-05 18:39:04.608 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+[INFO ] 2023-11-05 18:39:04.635 [Test worker]  o.f.c.i.c.DbMigrate - Current version of schema "public": << Empty Schema >>
+[INFO ] 2023-11-05 18:39:04.640 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.02.08.00.00 - add user table"
+[INFO ] 2023-11-05 18:39:04.659 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.02.22.30 - add weapon table"
+[INFO ] 2023-11-05 18:39:04.672 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.00 - add create date to weapon"
+[INFO ] 2023-11-05 18:39:04.685 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.30 - add magazine"
+[INFO ] 2023-11-05 18:39:04.697 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.10.21.00 - rename weapon table"
+[INFO ] 2023-11-05 18:39:04.708 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.20.00 - add ammunition column"
+[INFO ] 2023-11-05 18:39:04.718 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.21.30 - add weapon count to magazine"
+[INFO ] 2023-11-05 18:39:04.727 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.10.28.14.30 - add created by"
+[INFO ] 2023-11-05 18:39:04.738 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.13.30 - add create date to user table"
+[INFO ] 2023-11-05 18:39:04.748 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.14.00 - fix weapon create date column"
+[INFO ] 2023-11-05 18:39:04.756 [Test worker]  o.f.c.i.c.DbMigrate - Successfully applied 10 migrations to schema "public", now at version v2023.11.01.14.00 (execution time 00:00.035s)
+[INFO ] 2023-11-05 18:39:04.833 [Test worker]  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2023-11-05 18:39:04.880 [Test worker]  o.h.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+[INFO ] 2023-11-05 18:39:04.882 [Test worker]  o.h.c.Environment - HHH000406: Using bytecode reflection optimizer
+[INFO ] 2023-11-05 18:39:04.967 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:39:05.041 [Test worker]  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO ] 2023-11-05 18:39:05.208 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:39:05.602 [Test worker]  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2023-11-05 18:39:05.604 [Test worker]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:39:05.898 [Test worker]  o.s.d.j.r.q.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN ] 2023-11-05 18:39:06.272 [Test worker]  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2023-11-05 18:39:06.380 [Test worker]  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@51729c2b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4f8d7222, org.springframework.security.web.context.SecurityContextHolderFilter@695d0adc, org.springframework.security.web.header.HeaderWriterFilter@6a3a3b93, org.springframework.security.web.authentication.logout.LogoutFilter@23bc69a1, com.str.shootingresulttracker.configuration.security.JwtAuthenticationFilter@7b6824db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3a182eaf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4fde13d0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@387f53cf, org.springframework.security.web.session.SessionManagementFilter@1205d422, org.springframework.security.web.access.ExceptionTranslationFilter@55623ed5, org.springframework.security.web.access.intercept.AuthorizationFilter@7acc95a2]
+[INFO ] 2023-11-05 18:39:06.898 [Test worker]  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+[INFO ] 2023-11-05 18:39:06.944 [Test worker]  c.s.s.BackendApplicationTests - Started BackendApplicationTests in 6.356 seconds (process running for 7.27)
+[INFO ] 2023-11-05 18:39:07.474 [SpringApplicationShutdownHook]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:39:07.476 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[INFO ] 2023-11-05 18:39:07.478 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+[INFO ] 2023-11-05 18:39:28.163 [Test worker]  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+[INFO ] 2023-11-05 18:39:28.410 [Test worker]  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+[INFO ] 2023-11-05 18:39:28.411 [Test worker]  o.t.DockerClientFactory - Docker host IP address is localhost
+[INFO ] 2023-11-05 18:39:28.422 [Test worker]  o.t.DockerClientFactory - Connected to docker: 
+  Server Version: 24.0.6
+  API Version: 1.43
+  Operating System: Docker Desktop
+  Total Memory: 32002 MB
+[INFO ] 2023-11-05 18:39:28.436 [Test worker]  d.3.4] - Creating container for image: testcontainers/ryuk:0.3.4
+[INFO ] 2023-11-05 18:39:28.548 [Test worker]  o.t.u.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+[INFO ] 2023-11-05 18:39:28.675 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 is starting: 27477f06c581cecb244ffeb9e42cd43c20f4bb427600bbbb2d5c61d1c06731cb
+[INFO ] 2023-11-05 18:39:29.184 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 started in PT0.7562438S
+[INFO ] 2023-11-05 18:39:29.188 [Test worker]  o.t.u.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+[INFO ] 2023-11-05 18:39:29.188 [Test worker]  o.t.DockerClientFactory - Checking the system...
+[INFO ] 2023-11-05 18:39:29.189 [Test worker]  o.t.DockerClientFactory - ?? Docker server version should be at least 1.6.0
+[INFO ] 2023-11-05 18:39:29.189 [Test worker]  d.1.17] - Creating container for image: postgres:15.1-alpine3.17
+[WARN ] 2023-11-05 18:39:29.190 [Test worker]  d.1.17] - Reuse was requested but the environment does not support the reuse of containers
+To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at C:\Users\Pawel\.testcontainers.properties
+[INFO ] 2023-11-05 18:39:29.230 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 is starting: 2947fc8a82051108c0374218739d9cb7ee0d07196a025f5a6e8c066b69cb4e67
+[INFO ] 2023-11-05 18:39:30.811 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 started in PT1.6219034S
+[INFO ] 2023-11-05 18:39:30.838 [Test worker]  c.s.s.BackendApplicationTests - Starting BackendApplicationTests using Java 20.0.2.1 with PID 23448 (started by Pawe³ in C:\Repozytoria\shooting_result_tracker\backend)
+[INFO ] 2023-11-05 18:39:30.839 [Test worker]  c.s.s.BackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2023-11-05 18:39:31.370 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2023-11-05 18:39:31.419 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 3 JPA repository interfaces.
+[INFO ] 2023-11-05 18:39:31.705 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+[INFO ] 2023-11-05 18:39:31.823 [Test worker]  c.z.h.p.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@38363e96
+[INFO ] 2023-11-05 18:39:31.824 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+[INFO ] 2023-11-05 18:39:31.869 [Test worker]  o.f.c.i.l.VersionPrinter - Flyway Community Edition 9.21.0 by Redgate
+[INFO ] 2023-11-05 18:39:31.869 [Test worker]  o.f.c.i.l.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+[INFO ] 2023-11-05 18:39:31.869 [Test worker]  o.f.c.i.l.VersionPrinter - 
+[INFO ] 2023-11-05 18:39:31.878 [Test worker]  o.f.c.i.d.b.BaseDatabaseType - Database: jdbc:postgresql://localhost:54809/test (PostgreSQL 15.1)
+[INFO ] 2023-11-05 18:39:31.900 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+[INFO ] 2023-11-05 18:39:31.902 [Test worker]  o.f.c.i.c.DbValidate - Successfully validated 10 migrations (execution time 00:00.012s)
+[INFO ] 2023-11-05 18:39:31.912 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+[INFO ] 2023-11-05 18:39:31.939 [Test worker]  o.f.c.i.c.DbMigrate - Current version of schema "public": << Empty Schema >>
+[INFO ] 2023-11-05 18:39:31.944 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.02.08.00.00 - add user table"
+[INFO ] 2023-11-05 18:39:31.962 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.02.22.30 - add weapon table"
+[INFO ] 2023-11-05 18:39:31.977 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.00 - add create date to weapon"
+[INFO ] 2023-11-05 18:39:31.990 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.30 - add magazine"
+[INFO ] 2023-11-05 18:39:32.002 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.10.21.00 - rename weapon table"
+[INFO ] 2023-11-05 18:39:32.013 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.20.00 - add ammunition column"
+[INFO ] 2023-11-05 18:39:32.024 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.21.30 - add weapon count to magazine"
+[INFO ] 2023-11-05 18:39:32.034 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.10.28.14.30 - add created by"
+[INFO ] 2023-11-05 18:39:32.043 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.13.30 - add create date to user table"
+[INFO ] 2023-11-05 18:39:32.054 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.14.00 - fix weapon create date column"
+[INFO ] 2023-11-05 18:39:32.062 [Test worker]  o.f.c.i.c.DbMigrate - Successfully applied 10 migrations to schema "public", now at version v2023.11.01.14.00 (execution time 00:00.036s)
+[INFO ] 2023-11-05 18:39:32.140 [Test worker]  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2023-11-05 18:39:32.191 [Test worker]  o.h.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+[INFO ] 2023-11-05 18:39:32.193 [Test worker]  o.h.c.Environment - HHH000406: Using bytecode reflection optimizer
+[INFO ] 2023-11-05 18:39:32.275 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:39:32.357 [Test worker]  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO ] 2023-11-05 18:39:32.518 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:39:32.916 [Test worker]  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2023-11-05 18:39:32.917 [Test worker]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:39:33.245 [Test worker]  o.s.d.j.r.q.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN ] 2023-11-05 18:39:33.620 [Test worker]  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2023-11-05 18:39:33.768 [Test worker]  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@95504a0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@68d07b48, org.springframework.security.web.context.SecurityContextHolderFilter@51729c2b, org.springframework.security.web.header.HeaderWriterFilter@5073b0b8, org.springframework.security.web.authentication.logout.LogoutFilter@4bb4c147, com.str.shootingresulttracker.configuration.security.JwtAuthenticationFilter@6682e9b0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@387f53cf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@f9769ae, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d980ff2, org.springframework.security.web.session.SessionManagementFilter@7acc95a2, org.springframework.security.web.access.ExceptionTranslationFilter@463e413b, org.springframework.security.web.access.intercept.AuthorizationFilter@53365a58]
+[INFO ] 2023-11-05 18:39:34.284 [Test worker]  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+[INFO ] 2023-11-05 18:39:34.327 [Test worker]  c.s.s.BackendApplicationTests - Started BackendApplicationTests in 6.504 seconds (process running for 7.382)
+[INFO ] 2023-11-05 18:39:34.860 [SpringApplicationShutdownHook]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:39:34.863 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[INFO ] 2023-11-05 18:39:34.865 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+[INFO ] 2023-11-05 18:47:20.652 [Test worker]  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+[INFO ] 2023-11-05 18:47:20.902 [Test worker]  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+[INFO ] 2023-11-05 18:47:20.903 [Test worker]  o.t.DockerClientFactory - Docker host IP address is localhost
+[INFO ] 2023-11-05 18:47:20.910 [Test worker]  o.t.DockerClientFactory - Connected to docker: 
+  Server Version: 24.0.6
+  API Version: 1.43
+  Operating System: Docker Desktop
+  Total Memory: 32002 MB
+[INFO ] 2023-11-05 18:47:20.922 [Test worker]  d.3.4] - Creating container for image: testcontainers/ryuk:0.3.4
+[INFO ] 2023-11-05 18:47:21.025 [Test worker]  o.t.u.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+[INFO ] 2023-11-05 18:47:21.113 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 is starting: 337cabc4af41a6814783d336eba8fffb372d0b918c030435fb3f9189c104959c
+[INFO ] 2023-11-05 18:47:21.673 [Test worker]  d.3.4] - Container testcontainers/ryuk:0.3.4 started in PT0.7565152S
+[INFO ] 2023-11-05 18:47:21.676 [Test worker]  o.t.u.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+[INFO ] 2023-11-05 18:47:21.677 [Test worker]  o.t.DockerClientFactory - Checking the system...
+[INFO ] 2023-11-05 18:47:21.677 [Test worker]  o.t.DockerClientFactory - ?? Docker server version should be at least 1.6.0
+[INFO ] 2023-11-05 18:47:21.678 [Test worker]  d.1.17] - Creating container for image: postgres:15.1-alpine3.17
+[WARN ] 2023-11-05 18:47:21.678 [Test worker]  d.1.17] - Reuse was requested but the environment does not support the reuse of containers
+To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at C:\Users\Pawel\.testcontainers.properties
+[INFO ] 2023-11-05 18:47:21.715 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 is starting: 862237d8c2bacd17095a06f7b14413e2ccc61e145652a6fe04bc6491176652f2
+[INFO ] 2023-11-05 18:47:23.339 [Test worker]  d.1.17] - Container postgres:15.1-alpine3.17 started in PT1.6613853S
+[INFO ] 2023-11-05 18:47:23.363 [Test worker]  c.s.s.BackendApplicationTests - Starting BackendApplicationTests using Java 20.0.2.1 with PID 21804 (started by Pawe³ in C:\Repozytoria\shooting_result_tracker\backend)
+[INFO ] 2023-11-05 18:47:23.363 [Test worker]  c.s.s.BackendApplicationTests - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2023-11-05 18:47:23.854 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2023-11-05 18:47:23.900 [Test worker]  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 3 JPA repository interfaces.
+[INFO ] 2023-11-05 18:47:24.204 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+[INFO ] 2023-11-05 18:47:24.329 [Test worker]  c.z.h.p.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@19de32cb
+[INFO ] 2023-11-05 18:47:24.331 [Test worker]  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+[INFO ] 2023-11-05 18:47:24.373 [Test worker]  o.f.c.i.l.VersionPrinter - Flyway Community Edition 9.21.0 by Redgate
+[INFO ] 2023-11-05 18:47:24.374 [Test worker]  o.f.c.i.l.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+[INFO ] 2023-11-05 18:47:24.374 [Test worker]  o.f.c.i.l.VersionPrinter - 
+[INFO ] 2023-11-05 18:47:24.383 [Test worker]  o.f.c.i.d.b.BaseDatabaseType - Database: jdbc:postgresql://localhost:55156/test (PostgreSQL 15.1)
+[INFO ] 2023-11-05 18:47:24.405 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+[INFO ] 2023-11-05 18:47:24.408 [Test worker]  o.f.c.i.c.DbValidate - Successfully validated 10 migrations (execution time 00:00.012s)
+[INFO ] 2023-11-05 18:47:24.418 [Test worker]  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+[INFO ] 2023-11-05 18:47:24.444 [Test worker]  o.f.c.i.c.DbMigrate - Current version of schema "public": << Empty Schema >>
+[INFO ] 2023-11-05 18:47:24.449 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.02.08.00.00 - add user table"
+[INFO ] 2023-11-05 18:47:24.470 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.02.22.30 - add weapon table"
+[INFO ] 2023-11-05 18:47:24.484 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.00 - add create date to weapon"
+[INFO ] 2023-11-05 18:47:24.498 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.07.23.30 - add magazine"
+[INFO ] 2023-11-05 18:47:24.510 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.10.21.00 - rename weapon table"
+[INFO ] 2023-11-05 18:47:24.521 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.20.00 - add ammunition column"
+[INFO ] 2023-11-05 18:47:24.531 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.08.23.21.30 - add weapon count to magazine"
+[INFO ] 2023-11-05 18:47:24.542 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.10.28.14.30 - add created by"
+[INFO ] 2023-11-05 18:47:24.553 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.13.30 - add create date to user table"
+[INFO ] 2023-11-05 18:47:24.563 [Test worker]  o.f.c.i.c.DbMigrate - Migrating schema "public" to version "2023.11.01.14.00 - fix weapon create date column"
+[INFO ] 2023-11-05 18:47:24.571 [Test worker]  o.f.c.i.c.DbMigrate - Successfully applied 10 migrations to schema "public", now at version v2023.11.01.14.00 (execution time 00:00.034s)
+[INFO ] 2023-11-05 18:47:24.650 [Test worker]  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2023-11-05 18:47:24.713 [Test worker]  o.h.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+[INFO ] 2023-11-05 18:47:24.716 [Test worker]  o.h.c.Environment - HHH000406: Using bytecode reflection optimizer
+[INFO ] 2023-11-05 18:47:24.816 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:47:24.891 [Test worker]  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO ] 2023-11-05 18:47:25.054 [Test worker]  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+[INFO ] 2023-11-05 18:47:25.452 [Test worker]  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2023-11-05 18:47:25.454 [Test worker]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:47:25.778 [Test worker]  o.s.d.j.r.q.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN ] 2023-11-05 18:47:26.158 [Test worker]  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2023-11-05 18:47:26.279 [Test worker]  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@24c186cc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@17c373d3, org.springframework.security.web.context.SecurityContextHolderFilter@14270715, org.springframework.security.web.header.HeaderWriterFilter@5c3d91bc, org.springframework.security.web.authentication.logout.LogoutFilter@1cce2194, com.str.shootingresulttracker.configuration.security.JwtAuthenticationFilter@23e95661, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@38657ca8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2d158175, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5a78e7e3, org.springframework.security.web.session.SessionManagementFilter@60aee4ca, org.springframework.security.web.access.ExceptionTranslationFilter@2ca08575, org.springframework.security.web.access.intercept.AuthorizationFilter@28736857]
+[INFO ] 2023-11-05 18:47:26.768 [Test worker]  o.s.b.a.e.w.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+[INFO ] 2023-11-05 18:47:26.807 [Test worker]  c.s.s.BackendApplicationTests - Started BackendApplicationTests in 6.503 seconds (process running for 7.419)
+[INFO ] 2023-11-05 18:47:27.351 [SpringApplicationShutdownHook]  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2023-11-05 18:47:27.352 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[INFO ] 2023-11-05 18:47:27.356 [SpringApplicationShutdownHook]  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.

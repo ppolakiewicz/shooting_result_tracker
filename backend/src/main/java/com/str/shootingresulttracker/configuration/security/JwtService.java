@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -33,6 +34,7 @@ public class JwtService {
         return JWT.create()
                 .withSubject(userDto.getUsername())
                 .withClaim("active", userDto.isEnabled())
+                .withClaim("userId", userDto.getId().toString())
                 .withArrayClaim("grantedAuthorities", userDto.getAuthorities().stream()
                         .map(Object::toString)
                         .toArray(String[]::new)
@@ -44,6 +46,10 @@ public class JwtService {
 
     public String extractUsername(String token) {
         return decodedJWT(token).getSubject();
+    }
+
+    public UUID extractUserId(String token){
+        return UUID.fromString(decodedJWT(token).getClaim("userId").asString());
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {

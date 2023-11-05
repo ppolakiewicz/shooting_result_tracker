@@ -1,17 +1,16 @@
-package com.str.shootingresulttracker.domain.provider;
+package com.str.shootingresulttracker.domain.provider
 
-import com.str.shootingresulttracker.domain.weapon.Caliber;
-import com.str.shootingresulttracker.domain.weapon.Weapon;
-import com.str.shootingresulttracker.domain.weapon.WeaponType;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import spock.util.time.MutableClock;
+import com.str.shootingresulttracker.domain.magazine.Caliber
+import com.str.shootingresulttracker.domain.magazine.Weapon
+import com.str.shootingresulttracker.domain.magazine.WeaponType
+import lombok.AccessLevel
+import lombok.NoArgsConstructor
+import spock.util.time.MutableClock
 
-import java.time.OffsetDateTime;
-import java.util.UUID;
+import java.time.OffsetDateTime
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class WeaponTestProvider {
+class WeaponTestProvider {
 
     public static Weapon create() {
         return new Weapon(

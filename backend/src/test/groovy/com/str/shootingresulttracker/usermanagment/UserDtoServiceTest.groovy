@@ -1,10 +1,10 @@
 package com.str.shootingresulttracker.usermanagment
 
+import com.str.shootingresulttracker.core.AbstractUnitTest
 import org.mapstruct.factory.Mappers
-import spock.lang.Specification
 import spock.lang.Subject
 
-class UserDtoServiceTest extends Specification {
+class UserDtoServiceTest extends AbstractUnitTest {
 
     @Subject
     private UserService service
@@ -12,7 +12,8 @@ class UserDtoServiceTest extends Specification {
     void setup() {
         service = new UserService(
                 new UserRepositoryInMemory(),
-                Mappers.getMapper(UserMapper.class)
+                Mappers.getMapper(UserMapper.class),
+                clock
         )
     }
 

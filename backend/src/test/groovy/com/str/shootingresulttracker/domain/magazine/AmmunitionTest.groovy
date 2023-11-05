@@ -1,7 +1,6 @@
 package com.str.shootingresulttracker.domain.magazine
 
 
-import com.str.shootingresulttracker.domain.weapon.Caliber
 import spock.lang.Specification
 
 class AmmunitionTest extends Specification {

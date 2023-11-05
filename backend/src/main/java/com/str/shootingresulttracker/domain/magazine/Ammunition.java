@@ -2,7 +2,6 @@ package com.str.shootingresulttracker.domain.magazine;
 
 import com.str.shootingresulttracker.domain.kernel.Result;
 import com.str.shootingresulttracker.domain.magazine.error.AmmunitionQuantityError;
-import com.str.shootingresulttracker.domain.weapon.Caliber;
 
 import java.util.Objects;
 

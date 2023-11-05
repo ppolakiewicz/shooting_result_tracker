@@ -1,9 +1,7 @@
 package com.str.shootingresulttracker.domain.magazine
 
-
 import com.str.shootingresulttracker.domain.provider.MagazineTestProvider
 import com.str.shootingresulttracker.domain.provider.WeaponTestProvider
-import com.str.shootingresulttracker.domain.weapon.Caliber
 import spock.lang.Specification
 import spock.util.time.MutableClock
 
@@ -61,7 +59,7 @@ class MagazineTest extends Specification {
 
         then:
             result.getValue().get() == true
-            magazine.getAmmunitions().contains(newAmmunition)
+            magazine.getAmmunition().contains(newAmmunition)
     }
 
     void 'when magazine already contains ammunition for given caliber and same caliber ammunition is added then quantity should be summed'() {
@@ -85,7 +83,7 @@ class MagazineTest extends Specification {
         then:
             result.getValue().isPresent()
             result.getValue().get() == true
-            magazine.getAmmunitions().contains(expectedAmmunition)
+            magazine.getAmmunition().contains(expectedAmmunition)
     }
 
     void 'when subtracting ammunition from magazine that do not exists in magazine then magazine should still do not contains this ammunition'() {
@@ -104,7 +102,7 @@ class MagazineTest extends Specification {
 
         then:
             result.getError().isEmpty()
-            magazine.getAmmunitions().stream()
+            magazine.getAmmunition().stream()
                     .noneMatch { ammunition -> (ammunition.caliber() == notStoredCaliber) }
     }
 
@@ -125,7 +123,7 @@ class MagazineTest extends Specification {
 
         then:
             result.getError().isEmpty()
-            magazine.getAmmunitions().contains(expectedResult)
+            magazine.getAmmunition().contains(expectedResult)
     }
 
     void 'when whole ammunition for given caliber is subtracted then magazine should not contain given caliber'() {
@@ -142,9 +140,38 @@ class MagazineTest extends Specification {
 
         then:
             result.getError().isEmpty()
-            magazine.getAmmunitions().stream()
+            magazine.getAmmunition().stream()
                     .noneMatch { ammunition -> ammunition.caliber() == caliber }
     }
+
+    void 'magazine name can be changed to non empty value'() {
+        given:
+            String newMagazineName = 'New magazine name'
+            Magazine magazine = MagazineTestProvider.create()
+
+        expect:
+            magazine.getName() != newMagazineName
+
+        when:
+            magazine.setName(newMagazineName)
+
+        then:
+            magazine.getName() == newMagazineName
+    }
+
+    void 'magazine can not have empty name'(){
+        given:
+            String empty = ''
+            UUID ownerId = UUID.randomUUID()
+            Clock clock = new MutableClock()
+
+        when:
+            new Magazine(empty, ownerId, clock)
+
+        then:
+            thrown IllegalArgumentException
+    }
+
 
 
 }

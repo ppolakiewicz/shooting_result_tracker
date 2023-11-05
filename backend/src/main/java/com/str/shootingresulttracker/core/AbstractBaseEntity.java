@@ -29,7 +29,7 @@ public abstract class AbstractBaseEntity {
     private UUID id;
 
     @NotNull
-    @Column(name = "creation_date")
+    @Column(name = "create_date")
     private OffsetDateTime creationDate;
 
     public AbstractBaseEntity(Clock clock) {

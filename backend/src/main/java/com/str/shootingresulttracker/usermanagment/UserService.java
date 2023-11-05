@@ -4,12 +4,15 @@ import com.str.shootingresulttracker.domain.kernel.Result;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
+
 @Service
 @AllArgsConstructor
 public class UserService {
 
     private final UserJpaRepository repository;
     private final UserMapper mapper;
+    private final Clock clock;
 
     public Result<UserDto, UserAlreadyExistsError> create(String username, String password) {
 
@@ -17,7 +20,7 @@ public class UserService {
             return new Result<>(new UserAlreadyExistsError(username));
         }
 
-        var newUser = mapper.toDto(repository.save(UserEntity.newBasicUser(username, password)));
+        var newUser = mapper.toDto(repository.save(UserEntity.newBasicUser(username, password, clock)));
         return new Result<>(newUser);
     }
 

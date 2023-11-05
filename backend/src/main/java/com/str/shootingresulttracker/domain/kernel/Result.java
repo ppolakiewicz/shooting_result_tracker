@@ -21,6 +21,11 @@ public class Result<V, E extends AbstractBaseDomainError> {
         this.value = value;
     }
 
+    protected Result(V value, E error) {
+        this.value = value;
+        this.error = error;
+    }
+
     public Optional<E> getError() {
         return Optional.ofNullable(error);
     }
@@ -46,4 +51,21 @@ public class Result<V, E extends AbstractBaseDomainError> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Result<?, ?> result = (Result<?, ?>) o;
+
+        if (!Objects.equals(value, result.value)) return false;
+        return Objects.equals(error, result.error);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value != null ? value.hashCode() : 0;
+        result = 31 * result + (error != null ? error.hashCode() : 0);
+        return result;
+    }
 }

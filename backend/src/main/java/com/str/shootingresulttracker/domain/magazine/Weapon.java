@@ -1,7 +1,6 @@
-package com.str.shootingresulttracker.domain.weapon;
+package com.str.shootingresulttracker.domain.magazine;
 
 import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainEntity;
-import com.str.shootingresulttracker.domain.magazine.Magazine;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -65,8 +64,6 @@ public class Weapon extends AbstractBaseDomainEntity {
         Objects.requireNonNull(type, "Weapon type can not be null");
         Objects.requireNonNull(caliber, "Weapon caliber can not be null");
         Objects.requireNonNull(model, "Weapon model can not be null");
-        Objects.requireNonNull(productionDate, "Weapon production date can not be null");
-        Objects.requireNonNull(purchaseDate, "Weapon purchase date can not be null");
 
         this.name = name;
         this.type = type;

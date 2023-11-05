@@ -1,10 +1,9 @@
 package com.str.shootingresulttracker.domain.magazine;
 
 import com.str.shootingresulttracker.domain.kernel.AbstractBaseAggregate;
-import com.str.shootingresulttracker.domain.kernel.Result;
+import com.str.shootingresulttracker.domain.kernel.BooleanResult;
 import com.str.shootingresulttracker.domain.magazine.error.AmmunitionQuantityError;
 import com.str.shootingresulttracker.domain.magazine.error.FullMagazineError;
-import com.str.shootingresulttracker.domain.weapon.Weapon;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -12,13 +11,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.util.StringUtils;
 
 import java.time.Clock;
 import java.util.*;
 
 @Getter
 @Entity
-@Table(name = "magazine")
+@Table(name = "srt_magazine")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Magazine extends AbstractBaseAggregate {
 
@@ -36,51 +36,47 @@ public class Magazine extends AbstractBaseAggregate {
     @Column(name = "weapon_count")
     private int weaponCount;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Weapon> weapons;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "ammunition")
-    private Set<Ammunition> ammunitions;
+    private Set<Ammunition> ammunition;
 
     public Magazine(String name, UUID createdBy, Clock clock) {
         super(clock, createdBy);
-        Objects.requireNonNull(name, "Magazine name can not be null");
+        validateName(name);
 
         this.name = name;
         this.capacity = DEFAULT_CAPACITY;
         this.weaponCount = 0;
         this.weapons = new HashSet<>();
-        this.ammunitions = new HashSet<>();
+        this.ammunition = new HashSet<>();
     }
 
-    public Set<Weapon> getWeapons() {
-        return Collections.unmodifiableSet(weapons);
+    public Set<Ammunition> getAmmunition() {
+        return Collections.unmodifiableSet(ammunition);
     }
 
-    public Set<Ammunition> getAmmunitions() {
-        return Collections.unmodifiableSet(ammunitions);
-    }
-
-    public Result<Boolean, FullMagazineError> addWeapon(Weapon weapon) {
+    public BooleanResult<FullMagazineError> addWeapon(Weapon weapon) {
         Objects.requireNonNull(weapon, "Weapon for magazine can not be null");
 
         if (isMagazineFull()) {
-            return new Result<>(new FullMagazineError(capacity));
+            return BooleanResult.fail(new FullMagazineError(capacity));
         }
 
         this.weapons.add(weapon);
         weapon.setMagazine(this);
         this.weaponCount++;
 
-        return new Result<>(true);
+        return BooleanResult.success();
     }
 
-    public Result<Boolean, AmmunitionQuantityError> addAmmunition(Ammunition addedAmmunition) {
+    public BooleanResult<AmmunitionQuantityError> addAmmunition(Ammunition addedAmmunition) {
 
         Objects.requireNonNull(addedAmmunition, "Added ammunition can not be null");
 
-        var currentAmmunition = ammunitions.stream()
+        var currentAmmunition = ammunition.stream()
                 .filter(ammo -> ammo.caliber().equals(addedAmmunition.caliber()))
                 .findFirst()
                 .orElse(Ammunition.empty(addedAmmunition.caliber()));
@@ -88,20 +84,20 @@ public class Magazine extends AbstractBaseAggregate {
         var ammunitionAddResult = currentAmmunition.addQuantity(addedAmmunition.quantity());
 
         if (ammunitionAddResult.getError().isPresent()) {
-            return new Result<>(ammunitionAddResult.getError().get());
+            return BooleanResult.fail(ammunitionAddResult.getError().get());
         }
 
         ammunitionAddResult.getValue()
                 .ifPresent(updatedAmmunition -> replaceAmmunition(currentAmmunition, updatedAmmunition));
 
-        return new Result<>(true);
+        return BooleanResult.success();
     }
 
-    public Result<Boolean, AmmunitionQuantityError> subtractAmmunition(Ammunition subtractedAmmunition) {
+    public BooleanResult<AmmunitionQuantityError> subtractAmmunition(Ammunition subtractedAmmunition) {
 
         Objects.requireNonNull(subtractedAmmunition, "Subtracted ammunition can not be null");
 
-        var currentAmmunition = ammunitions.stream()
+        var currentAmmunition = ammunition.stream()
                 .filter(ammo -> ammo.caliber().equals(subtractedAmmunition.caliber()))
                 .findFirst()
                 .orElse(Ammunition.empty(subtractedAmmunition.caliber()));
@@ -109,7 +105,7 @@ public class Magazine extends AbstractBaseAggregate {
         var ammunitionSubtractResult = currentAmmunition.subtractQuantity(subtractedAmmunition.quantity());
 
         if (ammunitionSubtractResult.getError().isPresent()) {
-            return new Result<>(ammunitionSubtractResult.getError().get());
+            return BooleanResult.fail(ammunitionSubtractResult.getError().get());
         }
 
         ammunitionSubtractResult.getValue()
@@ -119,7 +115,12 @@ public class Magazine extends AbstractBaseAggregate {
                         () -> removeAmmunition(currentAmmunition)
                 );
 
-        return new Result<>(true);
+        return BooleanResult.success();
+    }
+
+    public void setName(String newMagazineName) {
+        validateName(newMagazineName);
+        this.name = newMagazineName;
     }
 
     private boolean isMagazineFull() {
@@ -127,12 +128,17 @@ public class Magazine extends AbstractBaseAggregate {
     }
 
     private void replaceAmmunition(Ammunition current, Ammunition newValue) {
-        this.ammunitions.remove(current);
-        this.ammunitions.add(newValue);
+        this.ammunition.remove(current);
+        this.ammunition.add(newValue);
     }
 
     private void removeAmmunition(Ammunition ammunition) {
-        this.ammunitions.remove(ammunition);
+        this.ammunition.remove(ammunition);
     }
 
+    private void validateName(String magazineName) {
+        if (!StringUtils.hasText(magazineName)) {
+            throw new IllegalArgumentException("Magazine name can not be empty");
+        }
+    }
 }

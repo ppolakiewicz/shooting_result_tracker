@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.weapon;
+package com.str.shootingresulttracker.domain.magazine;
 
 public enum WeaponType {
     PISTOL,
