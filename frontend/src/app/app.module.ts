@@ -4,8 +4,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthenticationGuard} from "./authentication/authentication.guard";
+import {JwtAuthenticationInterceptor} from "./authentication/jwt-authentication-interceptor";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
@@ -28,7 +29,9 @@ const routes: Routes = [
     RouterOutlet,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtAuthenticationInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
