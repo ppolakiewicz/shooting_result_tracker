@@ -15,7 +15,9 @@ public class BooleanResult<E extends AbstractBaseDomainError> extends Result<Boo
     }
 
     public void ifSuccess(SuccessHandler handler) {
-        getValue().ifPresent(result -> handler.handle());
+        if (getValue().orElse(false)) {
+            handler.handle();
+        }
     }
 
     public interface SuccessHandler {
