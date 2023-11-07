@@ -15,7 +15,7 @@ public class WeaponService {
     private final WeaponMapper mapper;
 
     @Transactional(readOnly = true)
-    public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID userId) {
-        return mapper.toDto(repository.findMagazineWeapons(magazineId, userId));
+    public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID ownerId) {
+        return mapper.toDto(repository.findMagazineWeapons(magazineId, ownerId));
     }
 }

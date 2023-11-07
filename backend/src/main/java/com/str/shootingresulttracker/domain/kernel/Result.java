@@ -2,6 +2,7 @@ package com.str.shootingresulttracker.domain.kernel;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class Result<V, E extends AbstractBaseDomainError> {
@@ -51,6 +52,10 @@ public class Result<V, E extends AbstractBaseDomainError> {
         }
     }
 
+    public void ifError(Consumer<? super E> errorConsumer) {
+        getError().ifPresent(errorConsumer);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,4 +73,5 @@ public class Result<V, E extends AbstractBaseDomainError> {
         result = 31 * result + (error != null ? error.hashCode() : 0);
         return result;
     }
+
 }

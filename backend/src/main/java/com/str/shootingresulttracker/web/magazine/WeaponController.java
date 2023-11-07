@@ -1,14 +1,10 @@
 package com.str.shootingresulttracker.web.magazine;
 
 import com.str.shootingresulttracker.domain.magazine.WeaponDto;
-import com.str.shootingresulttracker.domain.magazine.WeaponService;
 import com.str.shootingresulttracker.usermanagment.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,11 +14,20 @@ import java.util.UUID;
 @AllArgsConstructor
 class WeaponController {
 
-    private final WeaponService service;
+    private final WebWeaponService service;
 
     @GetMapping
     public List<WeaponDto> findAll(@PathVariable UUID magazineId, @AuthenticationPrincipal UserDto principal) {
         return service.findMagazineWeapons(magazineId, principal.getId());
+    }
+
+    @PostMapping
+    public void create(
+            @PathVariable UUID magazineId,
+            @RequestBody WeaponCreateCommand weaponCreateCommand,
+            @AuthenticationPrincipal UserDto principal) {
+
+        service.create(magazineId, weaponCreateCommand, principal.getId());
     }
 
 
