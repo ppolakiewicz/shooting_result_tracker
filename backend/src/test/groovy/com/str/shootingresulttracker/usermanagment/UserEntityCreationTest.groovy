@@ -15,7 +15,7 @@ class UserEntityCreationTest extends AbstractUnitTest {
         then:
             user.getUsername() == username
             user.getPassword() == password
-            user.getRoles() == [UserRole.USER]
+            user.getPermissions() == [UserPermission.MAGAZINE, UserPermission.WEAPON]
     }
 
 }

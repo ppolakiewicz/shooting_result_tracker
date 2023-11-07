@@ -5,7 +5,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 <!--Setup path based on system that you use. By default, logs are stored in project root folder-->
-    <property name="LOG_PATH" value="dependent_services\data\logs" />
+    <property name="LOG_PATH" value="..\dependent_services\data\logs"/>
     <property name="CONSOLE_LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %X{id} %c{1} - %msg%n" />
     <property name="FILE_LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %X{id} %c{1} - %msg%n" />
 

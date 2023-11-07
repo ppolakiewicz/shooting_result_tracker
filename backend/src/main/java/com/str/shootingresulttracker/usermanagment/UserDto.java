@@ -17,12 +17,12 @@ public class UserDto implements UserDetails {
 
     private final String username;
     private final String password;
-    private final Collection<UserRole> roles;
+    private final Collection<UserPermission> permissions;
     private final boolean active;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
+        return permissions.stream()
                 .map(role -> new SimpleGrantedAuthority(role.toString()))
                 .toList();
     }

@@ -12,7 +12,6 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.Clock;
 import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Entity
@@ -26,18 +25,18 @@ class UserEntity extends AbstractBaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
+    @Column(name = "permission")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Collection<UserRole> roles;
+    private Collection<UserPermission> permissions;
 
     @Column(name = "active")
     private boolean active;
 
-    public UserEntity(String username, String password, Collection<UserRole> roles, boolean active, Clock clock) {
+    public UserEntity(String username, String password, Collection<UserPermission> permissions, boolean active, Clock clock) {
         super(clock);
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.permissions = permissions;
         this.active = active;
     }
 
@@ -45,7 +44,7 @@ class UserEntity extends AbstractBaseEntity {
         return new UserEntity(
                 username,
                 password,
-                List.of(UserRole.USER),
+                UserPermission.DEFAULT_PERMISSIONS,
                 true,
                 clock
         );
