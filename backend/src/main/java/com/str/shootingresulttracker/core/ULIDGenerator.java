@@ -34,6 +34,9 @@ public class ULIDGenerator implements BeforeExecutionGenerator {
         var ulid = ULID.randomBinary(random);
         var bufferByte = ByteBuffer.wrap(ulid);
         bufferByte.order(ByteOrder.BIG_ENDIAN);
-        return new UUID(bufferByte.getLong(), bufferByte.getLong());
+        var uuid = new UUID(bufferByte.getLong(), bufferByte.getLong());
+
+        log.debug("Generated ULID: {}", uuid);
+        return uuid;
     }
 }

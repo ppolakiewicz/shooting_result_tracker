@@ -12,9 +12,10 @@ import java.util.UUID;
 public class WeaponService {
 
     private final WeaponRepository repository;
+    private final WeaponMapper mapper;
 
     @Transactional(readOnly = true)
-    public List<Weapon> findMagazineWeapons(UUID magazineId, UUID userId){
-        return repository.findMagazineWeapons(magazineId, userId);
+    public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID userId) {
+        return mapper.toDto(repository.findMagazineWeapons(magazineId, userId));
     }
 }

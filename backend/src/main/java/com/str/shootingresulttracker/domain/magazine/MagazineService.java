@@ -80,7 +80,7 @@ public class MagazineService {
         repository.findById(magazineId, ownerId).ifPresent(repository::delete);
     }
 
-    private <V> Magazine loadMagazine(UUID magazineId, UUID ownerId) {
+    private Magazine loadMagazine(UUID magazineId, UUID ownerId) {
         return repository.findById(magazineId, ownerId)
                 .orElseThrow(EntityDoNotExistsException::new);
     }
