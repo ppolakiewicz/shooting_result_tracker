@@ -12,5 +12,4 @@ class UserRepositoryInMemory extends AbstractInMemoryRepository<UserEntity> impl
                 .filter(user -> user.getUsername().equalsIgnoreCase(username))
                 .findFirst();
     }
-
 }

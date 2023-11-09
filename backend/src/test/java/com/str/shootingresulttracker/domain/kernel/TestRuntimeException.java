@@ -1,4 +1,4 @@
 package com.str.shootingresulttracker.domain.kernel;
 
-class TestRuntimeException extends RuntimeException{
+class TestRuntimeException extends RuntimeException {
 }

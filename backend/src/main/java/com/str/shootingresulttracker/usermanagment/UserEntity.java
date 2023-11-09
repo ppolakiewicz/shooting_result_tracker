@@ -17,7 +17,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "srt_user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-class UserEntity extends AbstractBaseEntity {
+public class UserEntity extends AbstractBaseEntity {
 
     @Column(name = "username")
     private String username;

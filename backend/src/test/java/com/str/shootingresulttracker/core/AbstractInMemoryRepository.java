@@ -21,7 +21,7 @@ import java.util.function.Function;
 import java.util.stream.StreamSupport;
 
 @Slf4j
-abstract public class AbstractInMemoryRepository<T extends AbstractBaseEntity> implements JpaRepository<T, UUID> {
+public abstract class AbstractInMemoryRepository<T extends AbstractBaseEntity> implements JpaRepository<T, UUID> {
 
     protected final Map<UUID, T> collection;
 
@@ -221,5 +221,4 @@ abstract public class AbstractInMemoryRepository<T extends AbstractBaseEntity> i
         }
         return field;
     }
-
 }
