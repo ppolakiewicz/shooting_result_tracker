@@ -8,9 +8,9 @@ export interface AuthenticationResponseDto {
 }
 
 export interface UserIdentity {
-  readonly id: number;
-  readonly username: string;
-  readonly role: string;
+  readonly userId: number;
+  readonly sub: string;
+  readonly grantedAuthorities: string[];
   readonly active: boolean;
   readonly exp: number;
   readonly iat: number;

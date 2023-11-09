@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TokenStorageService} from "./token-storage.service";
-import {UserIdentity} from "./authentication.types";
+import {UserIdentity} from "./authentication.model";
 import jwtDecode from "jwt-decode";
 
 @Injectable({
@@ -18,8 +18,6 @@ export class UserIdentityService {
       this.identity = this.decodeToken(this.tokenStorageService.getToken())
     }
 
-    console.log(this.identity?.exp);
-    console.log(Date.now());
     return this.identity != null && this.identity.exp < Date.now();
   }
 
@@ -33,7 +31,6 @@ export class UserIdentityService {
     this.identity = undefined;
   }
 
-
   private decodeToken(token: string | null): UserIdentity | undefined {
     if (!token) {
       return undefined;
@@ -41,5 +38,4 @@ export class UserIdentityService {
 
     return jwtDecode<UserIdentity>(token);
   }
-
 }

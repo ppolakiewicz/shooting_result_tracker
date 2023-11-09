@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of, shareReplay, tap} from "rxjs";
-import {AuthenticationResponseDto, UserAuthenticateDto} from "./authentication.types";
+import {AuthenticationResponseDto, UserAuthenticateDto} from "./authentication.model";
 import {HttpClient} from "@angular/common/http";
 import {UserIdentityService} from "./user-identity.service";
 
