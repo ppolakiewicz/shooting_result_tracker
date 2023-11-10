@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
+import {inject, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterModule, RouterOutlet, Routes} from "@angular/router";
+import {ActivatedRouteSnapshot, RouterModule, RouterOutlet, RouterStateSnapshot, Routes} from "@angular/router";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {authenticationGuard} from "./authentication/authentication.guard";
+import {AuthenticationGuard} from "./authentication/authentication.guard";
 import {JwtAuthenticationInterceptor} from "./authentication/jwt-authentication-interceptor";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
   {
     path: '',
-    canActivateChild: [authenticationGuard],
+    canActivateChild: [(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AuthenticationGuard).canActivateChild(childRoute, state)],
     loadChildren: () => import('./main/main.module').then(m => m.MainModule)
   },
   {path: '**', redirectTo: ''}
