@@ -1,0 +1,33 @@
+<div class="container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="snav.toggle()">
+        <fa-icon [icon]="menuIcon"></fa-icon>
+      </button>
+      <span>Shooting result tracker</span>
+      <span class="toolbar-spacer"></span>
+      <button mat-icon-button (click)="logout()" matTooltip="Logout">
+        <fa-icon [icon]="logoutIcon"></fa-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="side-nav-container">
+    <mat-sidenav #snav [mode]="'side'">
+      <mat-nav-list>
+        <button mat-button routerLink="/magazine">
+          <fa-icon [icon]="warehouseIcon"></fa-icon>
+          Magazine
+        </button>
+        <button mat-button routerLink="/weapon">
+          <fa-icon [icon]="gunIcon"></fa-icon>
+          Weapon
+        </button>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

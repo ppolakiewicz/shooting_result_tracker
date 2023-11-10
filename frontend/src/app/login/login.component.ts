@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../authentication/authentication.service";
-import {RoutingService} from "../routing/routing.service";
+import {NavigationService} from "../main/navigation.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent {
 
 
   constructor(private readonly authorizationService: AuthenticationService,
-              private readonly routingService: RoutingService) {
+              private readonly routingService: NavigationService) {
   }
 
   public login(): void {
