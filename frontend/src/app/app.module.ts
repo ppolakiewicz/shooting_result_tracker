@@ -7,13 +7,16 @@ import {ActivatedRouteSnapshot, RouterModule, RouterOutlet, RouterStateSnapshot,
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthenticationGuard} from "./authentication/authentication.guard";
 import {JwtAuthenticationInterceptor} from "./authentication/jwt-authentication-interceptor";
+import {MagazineService} from "./magazine/magazine.service";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
   {
     path: '',
     canActivateChild: [(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AuthenticationGuard).canActivateChild(childRoute, state)],
-    loadChildren: () => import('./main/main.module').then(m => m.MainModule)
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule),
+    resolve: {magazines: () => inject(MagazineService).getAll()}
+
   },
   {path: '**', redirectTo: ''}
 ]

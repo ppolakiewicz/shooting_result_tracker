@@ -24,8 +24,8 @@ class MagazineController {
     }
 
     @PostMapping
-    MagazineDto create(@RequestBody String name, @AuthenticationPrincipal UserDto principal) {
-        return service.createMagazine(name, principal.getId())
+    MagazineDto create(@RequestBody MagazineCreateCommand command, @AuthenticationPrincipal UserDto principal) {
+        return service.createMagazine(command.name(), principal.getId())
                 .orElseThrow(WebException::fromDomainError);
     }
 

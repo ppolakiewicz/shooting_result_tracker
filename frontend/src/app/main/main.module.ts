@@ -11,13 +11,17 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MainComponent} from "./main.component";
-import {MagazineComponent} from './magazine/magazine.component';
+import {MagazineListComponent} from './magazinelist/magazine-list.component';
 
 const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       {path: 'dashboard', component: DashboardComponent, title: 'Dashboard'},
-      {path: 'magazine', component: MagazineComponent, title: 'Magazine'}
+      {
+        path: 'magazine',
+        loadChildren: () => import('../magazine/magazine.module').then(m => m.MagazineModule),
+        title: 'Magazine'
+      }
     ]
   },
 ]
@@ -25,8 +29,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    MagazineComponent
+    MainComponent,
+    MagazineListComponent
   ],
+  exports: [],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

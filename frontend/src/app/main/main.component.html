@@ -14,16 +14,13 @@
 
   <mat-sidenav-container class="side-nav-container">
     <mat-sidenav #snav [mode]="'side'">
-      <mat-nav-list>
-        <button mat-button routerLink="/magazine">
-          <fa-icon [icon]="warehouseIcon"></fa-icon>
-          Magazine
-        </button>
+      <div class="mat-side-content">
+        <app-magazine-list></app-magazine-list>
         <button mat-button routerLink="/weapon">
           <fa-icon [icon]="gunIcon"></fa-icon>
           Weapon
         </button>
-      </mat-nav-list>
+      </div>
     </mat-sidenav>
 
     <mat-sidenav-content>

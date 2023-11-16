@@ -1,0 +1,10 @@
+<mat-list>
+  <div>
+    <fa-icon [icon]="warehouseIcon"></fa-icon>
+    Magazine
+    <button mat-icon-button (click)="addMagazine()">
+      <fa-icon [icon]="plusIcon"></fa-icon>
+    </button>
+  </div>
+  <mat-list-item *ngFor="let magazine of magazines">{{magazine.name}}</mat-list-item>
+</mat-list>
