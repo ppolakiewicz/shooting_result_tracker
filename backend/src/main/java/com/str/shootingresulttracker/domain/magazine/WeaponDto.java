@@ -10,6 +10,7 @@ public record WeaponDto(
         Caliber caliber,
         String model,
         OffsetDateTime productionDate,
-        OffsetDateTime purchaseDate
+        OffsetDateTime purchaseDate,
+        OffsetDateTime creationDate
 ) {
 }

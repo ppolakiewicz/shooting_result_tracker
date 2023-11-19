@@ -1,8 +1,8 @@
 package com.str.shootingresulttracker.domain.magazine;
 
 import com.str.shootingresulttracker.domain.kernel.AbstractBaseAggregate;
+import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainError;
 import com.str.shootingresulttracker.domain.kernel.BooleanResult;
-import com.str.shootingresulttracker.domain.magazine.error.AmmunitionQuantityError;
 import com.str.shootingresulttracker.domain.magazine.error.FullMagazineError;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -54,6 +54,18 @@ public class Magazine extends AbstractBaseAggregate {
         this.ammunition = new HashSet<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getWeaponCount() {
+        return weaponCount;
+    }
+
     public Set<Ammunition> getAmmunition() {
         return Collections.unmodifiableSet(ammunition);
     }
@@ -72,7 +84,7 @@ public class Magazine extends AbstractBaseAggregate {
         return BooleanResult.success();
     }
 
-    public BooleanResult<AmmunitionQuantityError> addAmmunition(Ammunition addedAmmunition) {
+    public BooleanResult<AbstractBaseDomainError> addAmmunition(Ammunition addedAmmunition) {
 
         Objects.requireNonNull(addedAmmunition, "Added ammunition can not be null");
 
@@ -93,7 +105,7 @@ public class Magazine extends AbstractBaseAggregate {
         return BooleanResult.success();
     }
 
-    public BooleanResult<AmmunitionQuantityError> subtractAmmunition(Ammunition subtractedAmmunition) {
+    public BooleanResult<AbstractBaseDomainError> subtractAmmunition(Ammunition subtractedAmmunition) {
 
         Objects.requireNonNull(subtractedAmmunition, "Subtracted ammunition can not be null");
 

@@ -13,22 +13,22 @@ interface MagazineRepository extends JpaRepository<Magazine, UUID> {
             select m
             from Magazine m
             where m.id = :magazineId
-            and m.createdBy = :userId
+            and m.createdBy = :ownerId
             """)
-    Optional<Magazine> findById(UUID magazineId, UUID userId);
+    Optional<Magazine> findById(UUID magazineId, UUID ownerId);
 
     @Query("""
             select m
             from Magazine m
-            where m.createdBy = :userId
+            where m.createdBy = :ownerId
             """)
-    List<Magazine> findAll(UUID userId);
+    List<Magazine> findAll(UUID ownerId);
 
     @Query("""
-            select case when count(m) > 0 then true else false end 
+            select case when count(m) > 0 then true else false end
             from Magazine m 
             where lower(m.name) = lower(:magazineName)
-            and m.createdBy = :userId
+            and m.createdBy = :ownerId
             """)
-    boolean existsByName(String magazineName, UUID userId);
+    boolean existsByName(String magazineName, UUID ownerId);
 }

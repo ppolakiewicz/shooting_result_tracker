@@ -1,10 +1,11 @@
 package com.str.shootingresulttracker.domain.magazine;
 
 import com.str.shootingresulttracker.domain.kernel.BooleanResult;
+import com.str.shootingresulttracker.domain.kernel.DomainResult;
 import com.str.shootingresulttracker.domain.kernel.EntityDoNotExistsException;
-import com.str.shootingresulttracker.domain.kernel.Result;
 import com.str.shootingresulttracker.domain.magazine.error.FullMagazineError;
 import com.str.shootingresulttracker.domain.magazine.error.MagazineWithGivenNameExistsError;
+import com.str.shootingresulttracker.domain.magazine.error.MaximumNumberOfMagazines;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class MagazineService {
 
+    private final int MAXIMUM_NUMBER_OF_MAGAZINES = 2;
+
     private final MagazineRepository repository;
     private final MagazineMapper mapper;
     private final Clock clock;
@@ -32,15 +35,23 @@ public class MagazineService {
     }
 
     @Transactional
-    public Result<MagazineDto, MagazineWithGivenNameExistsError> createMagazine(String magazineName, UUID ownerId) {
+    public DomainResult<MagazineDto> createMagazine(String magazineName, UUID ownerId) {
 
-        if (repository.existsByName(magazineName, ownerId)) {
-            return new Result<>(new MagazineWithGivenNameExistsError(magazineName));
+        var magazines = repository.findAll(ownerId);
+
+        if (magazines.size() >= MAXIMUM_NUMBER_OF_MAGAZINES) {
+            return new DomainResult<>(new MaximumNumberOfMagazines());
+        }
+
+        var magazineWithGivenNameExists = magazines.stream()
+                .anyMatch(magazine -> magazine.getName().equalsIgnoreCase(magazineName));
+        if (magazineWithGivenNameExists) {
+            return new DomainResult<>(new MagazineWithGivenNameExistsError(magazineName));
         }
 
         var magazine = new Magazine(magazineName, ownerId, clock);
         log.info("Created magazine {} for user {}", magazine.getId(), magazine.getCreatedBy());
-        return new Result<>(mapper.toDto(repository.save(magazine)));
+        return new DomainResult<>(mapper.toDto(repository.save(magazine)));
     }
 
     @Transactional
@@ -64,15 +75,15 @@ public class MagazineService {
     }
 
     @Transactional
-    public Result<MagazineDto, MagazineWithGivenNameExistsError> updateMagazine(UUID magazineId, String newMagazineName, UUID ownerId) {
+    public DomainResult<MagazineDto> updateMagazine(UUID magazineId, String newMagazineName, UUID ownerId) {
         if (repository.existsByName(newMagazineName, ownerId)) {
-            return new Result<>(new MagazineWithGivenNameExistsError(newMagazineName));
+            return new DomainResult<>(new MagazineWithGivenNameExistsError(newMagazineName));
         }
 
         var magazine = loadMagazine(magazineId, ownerId);
         magazine.setName(newMagazineName);
 
-        return new Result<>(mapper.toDto(repository.save(magazine)));
+        return new DomainResult<>(mapper.toDto(repository.save(magazine)));
     }
 
     @Transactional
