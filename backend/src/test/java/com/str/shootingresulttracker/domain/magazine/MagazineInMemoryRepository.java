@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-class MagazineTestRepository extends AbstractInMemoryRepository<Magazine> implements MagazineRepository {
+class MagazineInMemoryRepository extends AbstractInMemoryRepository<Magazine> implements MagazineRepository {
 
     @Override
     public Optional<Magazine> findById(UUID magazineId, UUID ownerId) {

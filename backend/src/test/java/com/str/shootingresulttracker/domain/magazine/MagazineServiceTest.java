@@ -17,7 +17,7 @@ class MagazineServiceTest extends AbstractUnitTest {
 
     @BeforeEach
     void setUp() {
-        MagazineRepository repository = new MagazineTestRepository();
+        MagazineRepository repository = new MagazineInMemoryRepository();
         MagazineMapper mapper = Mappers.getMapper(MagazineMapper.class);
 
         service = new MagazineService(repository, mapper, clock);

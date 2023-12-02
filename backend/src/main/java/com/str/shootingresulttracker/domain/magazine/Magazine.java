@@ -11,10 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.springframework.util.StringUtils;
 
 import java.time.Clock;
 import java.util.*;
+
+import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
 
 @Getter
 @Entity
@@ -36,7 +37,7 @@ public class Magazine extends AbstractBaseAggregate {
     @Column(name = "weapon_count")
     private int weaponCount;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "magazine", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Weapon> weapons;
 
     @JdbcTypeCode(SqlTypes.JSON)
@@ -45,25 +46,13 @@ public class Magazine extends AbstractBaseAggregate {
 
     public Magazine(String name, UUID createdBy, Clock clock) {
         super(clock, createdBy);
-        validateName(name);
+        requiredNonEmpty(name, "name");
 
         this.name = name;
         this.capacity = DEFAULT_CAPACITY;
         this.weaponCount = 0;
         this.weapons = new HashSet<>();
         this.ammunition = new HashSet<>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public int getWeaponCount() {
-        return weaponCount;
     }
 
     public Set<Ammunition> getAmmunition() {
@@ -131,7 +120,7 @@ public class Magazine extends AbstractBaseAggregate {
     }
 
     public void setName(String newMagazineName) {
-        validateName(newMagazineName);
+        requiredNonEmpty(newMagazineName, "name");
         this.name = newMagazineName;
     }
 
@@ -148,9 +137,4 @@ public class Magazine extends AbstractBaseAggregate {
         this.ammunition.remove(ammunition);
     }
 
-    private void validateName(String magazineName) {
-        if (!StringUtils.hasText(magazineName)) {
-            throw new IllegalArgumentException("Magazine name can not be empty");
-        }
-    }
 }

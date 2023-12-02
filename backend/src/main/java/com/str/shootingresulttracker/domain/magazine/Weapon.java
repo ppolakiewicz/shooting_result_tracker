@@ -12,6 +12,8 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
+
 @Getter
 @Entity
 @Table(name = "srt_weapon")
@@ -60,10 +62,10 @@ public class Weapon extends AbstractBaseDomainEntity {
             Clock clock) {
 
         super(clock, createdBy);
-        Objects.requireNonNull(name, "Weapon name can not be null");
+        requiredNonEmpty(name, "Weapon name");
         Objects.requireNonNull(type, "Weapon type can not be null");
         Objects.requireNonNull(caliber, "Weapon caliber can not be null");
-        Objects.requireNonNull(model, "Weapon model can not be null");
+        requiredNonEmpty(model, "Weapon model");
 
         this.name = name;
         this.type = type;

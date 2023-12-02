@@ -34,7 +34,6 @@ public abstract class AbstractBaseEntity {
     @GenericGenerator(name = GENERATOR_NAME, type = ULIDGenerator.class)
     private UUID id;
 
-    @Getter
     @NotNull
     @Column(name = "create_date")
     private OffsetDateTime creationDate;
