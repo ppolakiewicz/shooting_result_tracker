@@ -15,7 +15,7 @@ import java.util.*;
 import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
 import static java.util.Objects.requireNonNull;
 
-@Getter
+
 @Entity
 @Table(name = "srt_training_result")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -26,15 +26,17 @@ public class TrainingResult extends AbstractBaseDomainEntity {
     @JoinColumn(name = "training_id")
     private Training training;
 
+    @Getter
     @Column(name = "weapon_id")
     private UUID weaponId;
 
+    @Getter
     @Column(name = "weapon_name")
     private String weaponName;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "shots_results")
-    private List<Byte> shotsResults;
+    private List<Integer> shotsResults;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "files_ids")
@@ -64,13 +66,21 @@ public class TrainingResult extends AbstractBaseDomainEntity {
         filesIds.add(fileId);
     }
 
-    public void setShotsResults(List<Byte> shotsResults) {
+    public void setTraining(Training training) {
+        requireNonNull(training, "Training can not be null");
+        this.training = training;
+    }
+
+    public List<Integer> getShotsResults() {
+        return new ArrayList<>(shotsResults);
+    }
+
+    public void setShotsResults(List<Integer> shotsResults) {
         requireNonNull(shotsResults, "Shots result can not be empty");
         this.shotsResults = shotsResults;
     }
 
-    public void setTraining(Training training) {
-        requireNonNull(training, "Training can not be null");
-        this.training = training;
+    public Set<Long> getFilesIds() {
+        return new HashSet<>(filesIds);
     }
 }
