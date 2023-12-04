@@ -7,8 +7,8 @@ import java.util.function.Function;
 
 public class Result<V, E extends AbstractBaseDomainError> {
 
-    private final V value;
-    private final E error;
+    protected final V value;
+    protected final E error;
 
     public Result(E error) {
         Objects.requireNonNull(error, "Result can not have null error");
@@ -20,11 +20,6 @@ public class Result<V, E extends AbstractBaseDomainError> {
         Objects.requireNonNull(value, "Result can not have null value");
         this.error = null;
         this.value = value;
-    }
-
-    protected Result(V value, E error) {
-        this.value = value;
-        this.error = error;
     }
 
     public Optional<E> getError() {

@@ -21,7 +21,7 @@ import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
 @Entity
 @Table(name = "srt_magazine")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Magazine extends AbstractBaseAggregate {
+class Magazine extends AbstractBaseAggregate {
 
     private static final int DEFAULT_CAPACITY = 50;
 

@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
 @Entity
 @Table(name = "srt_training_result")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TrainingResult extends AbstractBaseDomainEntity {
+class TrainingResult extends AbstractBaseDomainEntity {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,14 +42,19 @@ public class TrainingResult extends AbstractBaseDomainEntity {
     @Column(name = "files_ids")
     private Set<Long> filesIds;
 
+
     public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName) {
+        this(clock, createdBy, weaponId, weaponName, List.of());
+    }
+
+    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName, List<Integer> shotsResults) {
         super(clock, createdBy);
         requireNonNull(weaponId, "Weapon ID is required");
         requiredNonEmpty(weaponName, "Weapon name");
 
         this.weaponId = weaponId;
         this.weaponName = weaponName;
-        this.shotsResults = new ArrayList<>();
+        this.shotsResults = shotsResults == null ? new ArrayList<>() : shotsResults;
         this.filesIds = new HashSet<>();
     }
 

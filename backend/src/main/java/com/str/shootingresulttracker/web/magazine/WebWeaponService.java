@@ -2,7 +2,6 @@ package com.str.shootingresulttracker.web.magazine;
 
 import com.str.shootingresulttracker.domain.magazine.MagazineService;
 import com.str.shootingresulttracker.domain.magazine.WeaponDto;
-import com.str.shootingresulttracker.domain.magazine.WeaponService;
 import com.str.shootingresulttracker.web.kernel.WebException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +16,11 @@ import java.util.UUID;
 @AllArgsConstructor
 class WebWeaponService {
 
-    private final WeaponService weaponService;
     private final MagazineService magazineService;
 
     @Transactional(readOnly = true)
     public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID ownerId) {
-        return weaponService.findMagazineWeapons(magazineId, ownerId);
+        return magazineService.findMagazineWeapons(magazineId, ownerId);
     }
 
     @Transactional
@@ -39,7 +37,7 @@ class WebWeaponService {
                 ownerId
         );
 
-        result.ifError(fullMagazineError -> {
+        result.ifFail(fullMagazineError -> {
             log.warn("Could not add weapon for magazine cause magazine is full");
             throw WebException.fromDomainError(fullMagazineError);
         });

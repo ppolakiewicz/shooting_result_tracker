@@ -20,19 +20,19 @@ class MagazineController {
 
     @GetMapping
     List<MagazineDto> findAll(@AuthenticationPrincipal UserDto principal) {
-        return service.loadAll(principal.getId());
+        return service.queryAll(principal.getId());
     }
 
     @PostMapping
     MagazineDto create(@RequestBody MagazineCreateCommand command, @AuthenticationPrincipal UserDto principal) {
-        return service.createMagazine(command.name(), principal.getId())
-                .orElseThrow(WebException::fromDomainError);
+        var magazineId = service.createMagazine(command.name(), principal.getId()).orElseThrow(WebException::fromDomainError);
+        return service.query(magazineId, principal.getId());
     }
 
     @PutMapping("/{magazineId}")
     MagazineDto update(@PathVariable UUID magazineId, @RequestBody String name, @AuthenticationPrincipal UserDto principal){
-        return service.updateMagazine(magazineId, name, principal.getId())
-                .orElseThrow(WebException::fromDomainError);
+        service.updateMagazine(magazineId, name, principal.getId()).orElseThrow(WebException::fromDomainError);
+        return service.query(magazineId, principal.getId());
     }
 
     @DeleteMapping("/{magazineId}")

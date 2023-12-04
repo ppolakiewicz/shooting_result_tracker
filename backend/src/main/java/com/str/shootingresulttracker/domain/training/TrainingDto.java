@@ -1,6 +1,13 @@
 package com.str.shootingresulttracker.domain.training;
 
-public record TrainingDto(
+import java.time.OffsetDateTime;
+import java.util.UUID;
 
+public record TrainingDto(
+        UUID id,
+        String name,
+        OffsetDateTime sessionDate,
+        String place,
+        int resultCount
 ) {
 }

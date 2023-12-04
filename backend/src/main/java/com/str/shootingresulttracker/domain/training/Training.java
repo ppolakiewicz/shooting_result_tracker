@@ -22,7 +22,7 @@ import static java.util.Objects.requireNonNull;
 @Entity
 @Table(name = "srt_training")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Training extends AbstractBaseAggregate {
+class Training extends AbstractBaseAggregate {
 
     private static final int TRAINING_RESULT_LIMIT = 5;
 

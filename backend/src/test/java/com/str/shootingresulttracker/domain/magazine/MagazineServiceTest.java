@@ -5,7 +5,6 @@ import com.str.shootingresulttracker.domain.magazine.error.MaximumNumberOfMagazi
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 
 import java.util.UUID;
 
@@ -18,9 +17,9 @@ class MagazineServiceTest extends AbstractUnitTest {
     @BeforeEach
     void setUp() {
         MagazineRepository repository = new MagazineInMemoryRepository();
-        MagazineMapper mapper = Mappers.getMapper(MagazineMapper.class);
+        WeaponRepository weaponRepository = new WeaponInMemoryRepository();
 
-        service = new MagazineService(repository, mapper, clock);
+        service = new MagazineService(repository, weaponRepository, clock);
     }
 
     @Test

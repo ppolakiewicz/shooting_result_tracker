@@ -30,5 +30,4 @@ class WeaponController {
         service.create(magazineId, weaponCreateCommand, principal.getId());
     }
 
-
 }

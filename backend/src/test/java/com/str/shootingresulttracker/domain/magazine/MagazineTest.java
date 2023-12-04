@@ -1,15 +1,15 @@
 package com.str.shootingresulttracker.domain.magazine;
 
 import com.str.shootingresulttracker.core.AbstractUnitTest;
-import com.str.shootingresulttracker.domain.provider.MagazineTestProvider;
-import com.str.shootingresulttracker.domain.provider.WeaponTestProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MagazineTest extends AbstractUnitTest {
 
@@ -42,31 +42,28 @@ class MagazineTest extends AbstractUnitTest {
 
         //and: magazine filled with weapons
         for (int i = 0; i < 50; i++) {
-            magazine.addWeapon(WeaponTestProvider.create(clock));
+            magazine.addWeapon(createWeapon());
         }
 
         //when: tried to add weapon to full magazine
-        var result = magazine.addWeapon(WeaponTestProvider.create(clock));
+        var result = magazine.addWeapon(createWeapon());
 
         //then
-        assertTrue(result.getValue().isPresent());
-        assertFalse(result.getValue().get());
-        assertTrue(result.getError().isPresent());
+        assertTrue(result.isFail());
     }
 
     @Test
     @DisplayName("when magazine do not contains ammunition that is added then new ammunition should be added to magazine")
     void whenMagazineDoNotContainsAmmunitionThatIsAddedThenNewAmmunitionShouldBeAddedToMagazine() {
         //given
-        Magazine magazine = MagazineTestProvider.create(clock);
+        Magazine magazine = createMagazine();
         Ammunition newAmmunition = new Ammunition(Caliber.ACP_45, 123);
 
         //when
         var result = magazine.addAmmunition(newAmmunition);
 
         //then
-        assertTrue(result.getValue().isPresent());
-        assertTrue(result.getValue().get());
+        assertTrue(result.isSuccess());
         assertTrue(magazine.getAmmunition().contains(newAmmunition));
     }
 
@@ -78,7 +75,7 @@ class MagazineTest extends AbstractUnitTest {
         Ammunition existingAmmunition = new Ammunition(caliber, 10);
 
         //and: magazine with ammunition for given caliber
-        Magazine magazine = MagazineTestProvider.create(clock);
+        Magazine magazine = createMagazine();
         magazine.addAmmunition(existingAmmunition);
 
         //and: new pack of ammunition
@@ -91,8 +88,7 @@ class MagazineTest extends AbstractUnitTest {
         var result = magazine.addAmmunition(newPackOfAmmunition);
 
         //then
-        assertTrue(result.getValue().isPresent());
-        assertTrue(result.getValue().get());
+        assertTrue(result.isSuccess());
         assertTrue(magazine.getAmmunition().contains(expectedAmmunition));
     }
 
@@ -100,7 +96,7 @@ class MagazineTest extends AbstractUnitTest {
     @DisplayName("when subtracting ammunition from magazine that do not exists in magazine then magazine should still do not contains this ammunition")
     void whenSubtractingAmmunitionFromMagazineThatDoNotExistsInMagazineThenMagazineShouldStillDoNotContainsThisAmmunition() {
         //given magazine with some ammunition
-        Magazine magazine = MagazineTestProvider.create(clock);
+        Magazine magazine = createMagazine();
         magazine.addAmmunition(new Ammunition(Caliber.ACP_45, 10));
         magazine.addAmmunition(new Ammunition(Caliber.ACP_380, 10));
         magazine.addAmmunition(new Ammunition(Caliber.PARABELLUM_9X19, 10));
@@ -113,7 +109,7 @@ class MagazineTest extends AbstractUnitTest {
         var result = magazine.subtractAmmunition(notStoredAmmunition);
 
         //then
-        assertTrue(result.getError().isEmpty());
+        assertTrue(result.isSuccess());
         assertTrue(magazine.getAmmunition().stream().noneMatch(ammunition -> (ammunition.caliber() == notStoredCaliber)));
     }
 
@@ -122,7 +118,7 @@ class MagazineTest extends AbstractUnitTest {
     void whenSubtractingAmmunitionFromMagazineThenQuantityShouldBeSubtracted() {
         //given
         Caliber caliber = Caliber.ACP_45;
-        Magazine magazine = MagazineTestProvider.create(clock);
+        Magazine magazine = createMagazine();
         magazine.addAmmunition(new Ammunition(caliber, 10));
 
         //and
@@ -135,7 +131,7 @@ class MagazineTest extends AbstractUnitTest {
         var result = magazine.subtractAmmunition(subtractedAmmunition);
 
         //then
-        assertTrue(result.getError().isEmpty());
+        assertTrue(result.isSuccess());
         assertTrue(magazine.getAmmunition().contains(expectedResult));
     }
 
@@ -144,7 +140,7 @@ class MagazineTest extends AbstractUnitTest {
     void whenWholeAmmunitionForGivenCaliberIsSubtractedThenMagazineShouldNotContainGivenCaliber() {
         //given
         Caliber caliber = Caliber.ACP_45;
-        Magazine magazine = MagazineTestProvider.create(clock);
+        Magazine magazine = createMagazine();
         magazine.addAmmunition(new Ammunition(caliber, 10));
 
         //and
@@ -154,7 +150,7 @@ class MagazineTest extends AbstractUnitTest {
         var result = magazine.subtractAmmunition(subtractedAmmunition);
 
         //then
-        assertTrue(result.getError().isEmpty());
+        assertTrue(result.isSuccess());
         assertTrue(magazine.getAmmunition().stream().noneMatch(ammunition -> ammunition.caliber() == caliber));
     }
 
@@ -163,7 +159,7 @@ class MagazineTest extends AbstractUnitTest {
     void magazineNameCanBeChangedToNonEmptyValue() {
         //given
         String newMagazineName = "New magazine name";
-        Magazine magazine = MagazineTestProvider.create(clock);
+        Magazine magazine = createMagazine();
 
         //expect
         Assertions.assertNotEquals(newMagazineName, magazine.getName());
@@ -184,6 +180,28 @@ class MagazineTest extends AbstractUnitTest {
 
         //then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Magazine(empty, ownerId, clock));
+    }
+
+    private Magazine createMagazine() {
+
+        return new Magazine(
+                "Test magazine",
+                UUID.randomUUID(),
+                clock
+        );
+    }
+
+    private Weapon createWeapon() {
+        return new Weapon(
+                "Weapon" + UUID.randomUUID().toString().substring(0, 10),
+                WeaponType.PISTOL,
+                Caliber.PARABELLUM_9X19,
+                "Glock 17",
+                OffsetDateTime.now(),
+                OffsetDateTime.now(),
+                UUID.randomUUID(),
+                clock
+        );
     }
 
 }

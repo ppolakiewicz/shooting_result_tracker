@@ -24,34 +24,42 @@ public class MagazineService {
     private final int MAXIMUM_NUMBER_OF_MAGAZINES = 2;
 
     private final MagazineRepository repository;
-    private final MagazineMapper mapper;
+    private final WeaponRepository weaponRepository;
     private final Clock clock;
 
     @Transactional(readOnly = true)
-    public List<MagazineDto> loadAll(UUID userId) {
-        return repository.findAll(userId).stream()
-                .map(mapper::toDto)
-                .toList();
+    public List<MagazineDto> queryAll(UUID userId) {
+        return repository.queryAll(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public MagazineDto query(UUID magazineId, UUID ownerId) {
+        return queryMagazine(magazineId, ownerId);
     }
 
     @Transactional
-    public DomainResult<MagazineDto> createMagazine(String magazineName, UUID ownerId) {
+    public DomainResult<UUID> createMagazine(String magazineName, UUID ownerId) {
 
-        var magazines = repository.findAll(ownerId);
+        var magazines = repository.queryAll(ownerId);
 
         if (magazines.size() >= MAXIMUM_NUMBER_OF_MAGAZINES) {
             return new DomainResult<>(new MaximumNumberOfMagazines());
         }
 
-        var magazineWithGivenNameExists = magazines.stream()
-                .anyMatch(magazine -> magazine.getName().equalsIgnoreCase(magazineName));
+        var magazineWithGivenNameExists = repository.existsByName(magazineName, ownerId);
         if (magazineWithGivenNameExists) {
             return new DomainResult<>(new MagazineWithGivenNameExistsError(magazineName));
         }
 
         var magazine = new Magazine(magazineName, ownerId, clock);
+        magazine = repository.save(magazine);
         log.info("Created magazine {} for user {}", magazine.getId(), magazine.getCreatedBy());
-        return new DomainResult<>(mapper.toDto(repository.save(magazine)));
+        return new DomainResult<>(magazine.getId());
+    }
+
+    @Transactional(readOnly = true)
+    public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID ownerId) {
+        return weaponRepository.queryMagazineWeapons(magazineId, ownerId);
     }
 
     @Transactional
@@ -75,24 +83,30 @@ public class MagazineService {
     }
 
     @Transactional
-    public DomainResult<MagazineDto> updateMagazine(UUID magazineId, String newMagazineName, UUID ownerId) {
+    public BooleanResult<MagazineWithGivenNameExistsError> updateMagazine(UUID magazineId, String newMagazineName, UUID ownerId) {
         if (repository.existsByName(newMagazineName, ownerId)) {
-            return new DomainResult<>(new MagazineWithGivenNameExistsError(newMagazineName));
+            return BooleanResult.fail(new MagazineWithGivenNameExistsError(newMagazineName));
         }
 
         var magazine = loadMagazine(magazineId, ownerId);
         magazine.setName(newMagazineName);
+        repository.save(magazine);
 
-        return new DomainResult<>(mapper.toDto(repository.save(magazine)));
+        return BooleanResult.success();
     }
 
     @Transactional
     public void deleteMagazine(UUID magazineId, UUID ownerId) {
-        repository.findById(magazineId, ownerId).ifPresent(repository::delete);
+        repository.load(magazineId, ownerId).ifPresent(repository::delete);
     }
 
     private Magazine loadMagazine(UUID magazineId, UUID ownerId) {
-        return repository.findById(magazineId, ownerId)
+        return repository.load(magazineId, ownerId)
+                .orElseThrow(EntityDoNotExistsException::new);
+    }
+
+    private MagazineDto queryMagazine(UUID magazineId, UUID ownerId) {
+        return repository.queryById(magazineId, ownerId)
                 .orElseThrow(EntityDoNotExistsException::new);
     }
 }

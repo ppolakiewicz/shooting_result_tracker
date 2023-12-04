@@ -18,7 +18,7 @@ import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
 @Entity
 @Table(name = "srt_weapon")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Weapon extends AbstractBaseDomainEntity {
+class Weapon extends AbstractBaseDomainEntity {
 
     @NotNull
     @Column(name = "name")

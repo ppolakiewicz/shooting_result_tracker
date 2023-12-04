@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TrainingTest extends AbstractUnitTest {
 
@@ -75,8 +76,7 @@ class TrainingTest extends AbstractUnitTest {
         var result = training.addResult(trainingResult);
 
         //then
-        assertTrue(result.getValue().isPresent());
-        assertTrue(result.getValue().get());
+        assertTrue(result.isSuccess());
     }
 
     @Test
@@ -104,9 +104,7 @@ class TrainingTest extends AbstractUnitTest {
         var result = training.addResult(nextTrainingResult);
 
         //then
-        assertTrue(result.getValue().isPresent());
-        assertFalse(result.getValue().get());
-        assertTrue(result.getError().isPresent());
+        assertTrue(result.isFail());
     }
 
 }
