@@ -36,10 +36,10 @@ class TrainingServiceTest extends AbstractUnitTest {
         var result = service.create(name, sessionDate, place, ownerId);
 
         //then: successfully created training
-        assertTrue(result.getValue().isPresent());
+        assertTrue(result.isValue());
 
         //and
-        var training = service.queryById(result.getValue().get(), ownerId);
+        var training = service.queryById(result.getValue(), ownerId);
         assertTrue(training.isPresent());
         assertEquals(name, training.get().name());
     }

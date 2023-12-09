@@ -1,7 +1,6 @@
 package com.str.shootingresulttracker.domain.kernel;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -22,17 +21,17 @@ public class Result<V, E extends AbstractBaseDomainError> {
         this.value = value;
     }
 
-    public Optional<E> getError() {
-        return Optional.ofNullable(error);
+    public E getError() {
+        return error;
     }
 
-    public Optional<V> getValue() {
-        return Optional.ofNullable(value);
+    public V getValue() {
+        return value;
     }
 
     public <U> Result<U, E> mapValue(Function<? super V, ? extends U> mapper) {
         Objects.requireNonNull(mapper);
-        if (getError().isPresent()) {
+        if (error != null) {
             return new Result<>(error);
         } else {
             return new Result<>(mapper.apply(value));
@@ -40,7 +39,7 @@ public class Result<V, E extends AbstractBaseDomainError> {
     }
 
     public <X extends Throwable> V orElseThrow(Function<E, ? extends X> exceptionProvider) throws X {
-        if (value != null) {
+        if (isValue()) {
             return value;
         } else {
             throw exceptionProvider.apply(error);
@@ -48,7 +47,23 @@ public class Result<V, E extends AbstractBaseDomainError> {
     }
 
     public void ifError(Consumer<? super E> errorConsumer) {
-        getError().ifPresent(errorConsumer);
+        if (isError()) {
+            errorConsumer.accept(error);
+        }
+    }
+
+    public void ifValue(Consumer<? super V> valueConsumer) {
+        if (isValue()) {
+            valueConsumer.accept(value);
+        }
+    }
+
+    public boolean isError() {
+        return error != null;
+    }
+
+    public boolean isValue() {
+        return value != null;
     }
 
     @Override

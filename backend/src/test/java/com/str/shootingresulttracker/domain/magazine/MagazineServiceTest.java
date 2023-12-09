@@ -30,12 +30,12 @@ class MagazineServiceTest extends AbstractUnitTest {
 
         //then
         var firstMagazineResult = service.createMagazine("FirstMagazine", userId);
-        assertTrue(firstMagazineResult.getValue().isPresent());
-        assertTrue(firstMagazineResult.getError().isEmpty());
+        assertTrue(firstMagazineResult.isValue());
+        assertFalse(firstMagazineResult.isError());
 
         var secondMagazineResult = service.createMagazine("SecondMagazine", userId);
-        assertTrue(secondMagazineResult.getValue().isPresent());
-        assertTrue(secondMagazineResult.getError().isEmpty());
+        assertTrue(secondMagazineResult.isValue());
+        assertFalse(secondMagazineResult.isError());
     }
 
     @Test
@@ -50,8 +50,8 @@ class MagazineServiceTest extends AbstractUnitTest {
         var result = service.createMagazine("Third magazine", userId);
 
         //then
-        assertTrue(result.getError().isPresent());
-        assertEquals(result.getError().get().getClass(), MaximumNumberOfMagazines.class);
+        assertTrue(result.isError());
+        assertEquals(result.getError().getClass(), MaximumNumberOfMagazines.class);
     }
 
     @Test
@@ -62,9 +62,8 @@ class MagazineServiceTest extends AbstractUnitTest {
         var magazineName = "TestMagazine";
 
         //then
-        assertTrue(service.createMagazine(magazineName, userId).getError().isEmpty());
-        assertFalse(service.createMagazine(magazineName, userId).getError().isEmpty());
+        assertFalse(service.createMagazine(magazineName, userId).isError());
+        assertTrue(service.createMagazine(magazineName, userId).isError());
     }
-
 
 }

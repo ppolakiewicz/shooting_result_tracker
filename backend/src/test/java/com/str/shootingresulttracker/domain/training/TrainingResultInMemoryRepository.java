@@ -5,7 +5,7 @@ import com.str.shootingresulttracker.core.AbstractInMemoryRepository;
 import java.util.List;
 import java.util.UUID;
 
-public class TrainingResultInMemoryRepository extends AbstractInMemoryRepository<TrainingResult> implements TrainingResultRepository {
+class TrainingResultInMemoryRepository extends AbstractInMemoryRepository<TrainingResult> implements TrainingResultRepository {
 
     @Override
     public List<TrainingResultDto> queryAll(UUID trainingId, UUID ownerId) {

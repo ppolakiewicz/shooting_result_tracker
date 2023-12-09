@@ -14,9 +14,9 @@ class ResultTest {
         Result<Integer, TestDomainError> result = new Result<>(1);
 
         //expect
-        assertTrue(result.getValue().isPresent());
-        assertEquals(1, result.getValue().get());
-        assertTrue(result.getError().isEmpty());
+        assertTrue(result.isValue());
+        assertEquals(1, result.getValue());
+        assertFalse(result.isError());
     }
 
     @Test
@@ -27,9 +27,9 @@ class ResultTest {
         Result<Integer, TestDomainError> result = new Result<>(error);
 
         //expect
-        assertTrue(result.getValue().isEmpty());
-        assertTrue(result.getError().isPresent());
-        assertEquals(result.getError().get(), error);
+        assertFalse(result.isValue());
+        assertTrue(result.isError());
+        assertEquals(result.getError(), error);
     }
 
     @Test
@@ -44,8 +44,8 @@ class ResultTest {
         Result<Integer, TestDomainError> result = baseResult.mapValue(value -> value * 2);
 
         //then
-        assertTrue(result.getValue().isEmpty());
-        assertTrue(result.getError().isPresent());
+        assertFalse(result.isValue());
+        assertTrue(result.isError());
         assertEquals(expectedResult, result);
     }
 

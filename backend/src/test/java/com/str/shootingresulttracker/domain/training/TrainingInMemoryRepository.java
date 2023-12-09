@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TrainingInMemoryRepository extends AbstractInMemoryRepository<Training> implements TrainingRepository {
+class TrainingInMemoryRepository extends AbstractInMemoryRepository<Training> implements TrainingRepository {
 
     @Override
     public List<TrainingDto> queryAll(UUID ownerId) {

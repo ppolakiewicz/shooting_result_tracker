@@ -40,7 +40,7 @@ public class TrainingService {
     @Transactional
     public DomainResult<UUID> create(String name, OffsetDateTime sessionDate, String place, UUID ownerId) {
         var training = new Training(clock, ownerId, name, sessionDate, place);
-        repository.save(training);
+        training = repository.save(training);
         return new DomainResult<>(training.getId());
     }
 

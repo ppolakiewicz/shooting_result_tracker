@@ -16,6 +16,7 @@ import java.time.Clock;
 import java.util.*;
 
 import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
+import static java.util.Optional.ofNullable;
 
 @Getter
 @Entity
@@ -84,13 +85,11 @@ class Magazine extends AbstractBaseAggregate {
 
         var ammunitionAddResult = currentAmmunition.addQuantity(addedAmmunition.quantity());
 
-        if (ammunitionAddResult.getError().isPresent()) {
-            return BooleanResult.fail(ammunitionAddResult.getError().get());
+        if (ammunitionAddResult.isError()) {
+            return BooleanResult.fail(ammunitionAddResult.getError());
         }
 
-        ammunitionAddResult.getValue()
-                .ifPresent(updatedAmmunition -> replaceAmmunition(currentAmmunition, updatedAmmunition));
-
+        ammunitionAddResult.ifValue(updatedAmmunition -> replaceAmmunition(currentAmmunition, updatedAmmunition));
         return BooleanResult.success();
     }
 
@@ -105,11 +104,11 @@ class Magazine extends AbstractBaseAggregate {
 
         var ammunitionSubtractResult = currentAmmunition.subtractQuantity(subtractedAmmunition.quantity());
 
-        if (ammunitionSubtractResult.getError().isPresent()) {
-            return BooleanResult.fail(ammunitionSubtractResult.getError().get());
+        if (ammunitionSubtractResult.isError()) {
+            return BooleanResult.fail(ammunitionSubtractResult.getError());
         }
 
-        ammunitionSubtractResult.getValue()
+        ofNullable(ammunitionSubtractResult.getValue())
                 .filter(updatedAmmunition -> updatedAmmunition.quantity() > 0)
                 .ifPresentOrElse(
                         updatedAmmunition -> replaceAmmunition(currentAmmunition, updatedAmmunition),

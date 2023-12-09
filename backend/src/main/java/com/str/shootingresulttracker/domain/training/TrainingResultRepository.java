@@ -17,8 +17,7 @@ interface TrainingResultRepository extends Repository<TrainingResult, UUID> {
             tr.filesIds
             )
             from TrainingResult tr
-            where tr.id = :trainingResultId
-            and tr.createdBy = :ownerId
+            where tr.createdBy = :ownerId
             and tr.training.id = :trainingId
             """)
     List<TrainingResultDto> queryAll(UUID trainingId, UUID ownerId);

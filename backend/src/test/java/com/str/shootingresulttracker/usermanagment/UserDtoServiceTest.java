@@ -30,10 +30,10 @@ class UserDtoServiceTest extends AbstractUnitTest {
         service.create(username, "password");
 
         //when
-        var result = service.findByUserName(username).getValue();
+        var result = service.findByUserName(username);
 
         //then
-        assertTrue(result.isPresent());
-        Assertions.assertEquals(username, result.get().getUsername());
+        assertTrue(result.isValue());
+        Assertions.assertEquals(username, result.getValue().getUsername());
     }
 }

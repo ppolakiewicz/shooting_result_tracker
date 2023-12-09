@@ -31,10 +31,10 @@ class AmmunitionTest {
         var result = ammunition.addQuantity(10);
 
         //then
-        assertTrue(result.getError().isEmpty());
-        assertTrue(result.getValue().isPresent());
-        assertNotEquals(ammunition, result.getValue().get());
-        assertEquals(20, result.getValue().get().quantity());
+        assertFalse(result.isError());
+        assertTrue(result.isValue());
+        assertNotEquals(ammunition, result.getValue());
+        assertEquals(20, result.getValue().quantity());
     }
 
     @Test
@@ -47,8 +47,8 @@ class AmmunitionTest {
         var result = ammunition.addQuantity(-5);
 
         //then
-        assertTrue(result.getValue().isEmpty());
-        assertTrue(result.getError().isPresent());
+        assertFalse(result.isValue());
+        assertTrue(result.isError());
     }
 
     @Test
@@ -61,10 +61,10 @@ class AmmunitionTest {
         var result = ammunition.subtractQuantity(5);
 
         //then
-        assertTrue(result.getError().isEmpty());
-        assertTrue(result.getValue().isPresent());
-        assertNotEquals(ammunition, result.getValue().get());
-        assertEquals(5, result.getValue().get().quantity());
+        assertFalse(result.isError());
+        assertTrue(result.isValue());
+        assertNotEquals(ammunition, result.getValue());
+        assertEquals(5, result.getValue().quantity());
     }
 
     @Test
@@ -77,10 +77,10 @@ class AmmunitionTest {
         var result = ammunition.subtractQuantity(15);
 
         //then
-        assertTrue(result.getError().isEmpty());
-        assertTrue(result.getValue().isPresent());
-        assertNotEquals(ammunition, result.getValue().get());
-        assertEquals(0L, result.getValue().get().quantity());
+        assertFalse(result.isError());
+        assertTrue(result.isValue());
+        assertNotEquals(ammunition, result.getValue());
+        assertEquals(0L, result.getValue().quantity());
     }
 
     @Test
@@ -93,8 +93,8 @@ class AmmunitionTest {
         var result = ammunition.subtractQuantity(-5);
 
         //then
-        assertTrue(result.getValue().isEmpty());
-        assertTrue(result.getError().isPresent());
+        assertFalse(result.isValue());
+        assertTrue(result.isError());
     }
 
     @Test
