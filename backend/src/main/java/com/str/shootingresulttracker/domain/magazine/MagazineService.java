@@ -58,7 +58,7 @@ public class MagazineService {
     }
 
     @Transactional(readOnly = true)
-    public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID ownerId) {
+    public List<WeaponDto> queryMagazineWeapons(UUID magazineId, UUID ownerId) {
         return weaponRepository.queryMagazineWeapons(magazineId, ownerId);
     }
 

@@ -20,7 +20,7 @@ class WebWeaponService {
 
     @Transactional(readOnly = true)
     public List<WeaponDto> findMagazineWeapons(UUID magazineId, UUID ownerId) {
-        return magazineService.findMagazineWeapons(magazineId, ownerId);
+        return magazineService.queryMagazineWeapons(magazineId, ownerId);
     }
 
     @Transactional
