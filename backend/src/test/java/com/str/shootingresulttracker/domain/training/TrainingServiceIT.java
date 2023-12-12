@@ -1,11 +1,13 @@
 package com.str.shootingresulttracker.domain.training;
 
 import com.str.shootingresulttracker.core.AbstractIntegrationTest;
+import com.str.shootingresulttracker.domain.model.Distance;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +37,9 @@ class TrainingServiceIT extends AbstractIntegrationTest {
                 trainingId.getValue(),
                 weaponId,
                 weaponName,
-                ownerId
+                ownerId,
+                List.of(),
+                Distance.ofMeters(1)
         );
 
         //then: result should be true

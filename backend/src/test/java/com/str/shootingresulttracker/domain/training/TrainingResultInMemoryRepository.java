@@ -21,7 +21,7 @@ class TrainingResultInMemoryRepository extends AbstractInMemoryRepository<Traini
                 result.getWeaponId(),
                 result.getWeaponName(),
                 result.getShotsResults(),
-                result.getFilesIds()
+                result.getDistance()
         );
     }
 }

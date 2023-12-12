@@ -14,7 +14,7 @@ interface TrainingResultRepository extends Repository<TrainingResult, UUID> {
             tr.weaponId,
             tr.weaponName,
             tr.shotsResults,
-            tr.filesIds
+            tr.distance
             )
             from TrainingResult tr
             where tr.createdBy = :ownerId

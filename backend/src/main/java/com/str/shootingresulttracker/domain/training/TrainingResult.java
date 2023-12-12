@@ -1,6 +1,8 @@
 package com.str.shootingresulttracker.domain.training;
 
+import com.str.shootingresulttracker.domain.infrastructure.DistanceConverter;
 import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainEntity;
+import com.str.shootingresulttracker.domain.model.Distance;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -10,7 +12,8 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.Clock;
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 import static com.str.shootingresulttracker.kernel.StringUtils.requiredNonEmpty;
 import static java.util.Objects.requireNonNull;
@@ -34,28 +37,25 @@ class TrainingResult extends AbstractBaseDomainEntity {
     @Column(name = "weapon_name")
     private String weaponName;
 
+    @Getter
+    @Column(name = "distance")
+    @Convert(converter = DistanceConverter.class)
+    private Distance distance;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "shots_results")
-    private List<Integer> shotsResults;
+    private List<ShootResult> shotsResults;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "files_ids")
-    private Set<Long> filesIds;
-
-
-    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName) {
-        this(clock, createdBy, weaponId, weaponName, List.of());
-    }
-
-    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName, List<Integer> shotsResults) {
+    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName, List<ShootResult> shotsResults, Distance distance) {
         super(clock, createdBy);
         requireNonNull(weaponId, "Weapon ID is required");
         requiredNonEmpty(weaponName, "Weapon name");
+        requireNonNull(distance, "Training distance is required");
 
         this.weaponId = weaponId;
         this.weaponName = weaponName;
-        this.shotsResults = shotsResults == null ? new ArrayList<>() : shotsResults;
-        this.filesIds = new HashSet<>();
+        this.distance = distance;
+        this.shotsResults = shotsResults == null ? List.of() : List.copyOf(shotsResults);
     }
 
     public void changeWeapon(UUID weaponId, String weaponName) {
@@ -66,26 +66,18 @@ class TrainingResult extends AbstractBaseDomainEntity {
         this.weaponName = weaponName;
     }
 
-    public void addFile(Long fileId) {
-        requireNonNull(fileId, "File id can not be null");
-        filesIds.add(fileId);
-    }
-
     public void setTraining(Training training) {
         requireNonNull(training, "Training can not be null");
         this.training = training;
     }
 
-    public List<Integer> getShotsResults() {
-        return new ArrayList<>(shotsResults);
+    public List<ShootResult> getShotsResults() {
+        return List.copyOf(shotsResults);
     }
 
-    public void setShotsResults(List<Integer> shotsResults) {
+    public void setShotsResults(List<ShootResult> shotsResults) {
         requireNonNull(shotsResults, "Shots result can not be empty");
-        this.shotsResults = shotsResults;
+        this.shotsResults = List.copyOf(shotsResults);
     }
 
-    public Set<Long> getFilesIds() {
-        return new HashSet<>(filesIds);
-    }
 }

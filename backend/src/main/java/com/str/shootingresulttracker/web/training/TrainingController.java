@@ -57,7 +57,7 @@ class TrainingController {
         var weaponName = weaponService.queryWeaponName(command.weaponId(), principal.getId())
                 .orElseThrow(TrainingWeaponDoNotExistsWebException::new);
 
-        service.addTrainingResult(trainingId, command.weaponId(), weaponName, principal.getId())
+        service.addTrainingResult(trainingId, command.weaponId(), weaponName, principal.getId(), command.shootResults(), command.distance())
                 .orElseThrow(WebException::fromDomainError);
     }
 

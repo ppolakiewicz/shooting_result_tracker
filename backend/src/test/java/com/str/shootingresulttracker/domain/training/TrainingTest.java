@@ -1,6 +1,7 @@
 package com.str.shootingresulttracker.domain.training;
 
 import com.str.shootingresulttracker.core.AbstractUnitTest;
+import com.str.shootingresulttracker.domain.model.Distance;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import static java.util.List.of;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -63,7 +65,7 @@ class TrainingTest extends AbstractUnitTest {
         UUID weaponId = UUID.randomUUID();
         String weaponName = "Test weapon";
 
-        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName);
+        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, of(), Distance.ofMeters(1));
 
         //and: training
         String trainingName = "Test training";
@@ -95,12 +97,12 @@ class TrainingTest extends AbstractUnitTest {
         String weaponName = "Test weapon";
 
         for (int i = 0; i < 5; i++) {
-            var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName);
+            var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, of(), Distance.ofMeters(1));
             training.addResult(trainingResult);
         }
 
         //when
-        var nextTrainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName);
+        var nextTrainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, of(), Distance.ofMeters(1));
         var result = training.addResult(nextTrainingResult);
 
         //then

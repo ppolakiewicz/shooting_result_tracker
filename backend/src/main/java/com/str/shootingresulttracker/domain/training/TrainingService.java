@@ -3,6 +3,7 @@ package com.str.shootingresulttracker.domain.training;
 import com.str.shootingresulttracker.domain.kernel.BooleanResult;
 import com.str.shootingresulttracker.domain.kernel.DomainResult;
 import com.str.shootingresulttracker.domain.kernel.EntityDoNotExistsException;
+import com.str.shootingresulttracker.domain.model.Distance;
 import com.str.shootingresulttracker.domain.training.error.FullTrainingError;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,16 @@ public class TrainingService {
     }
 
     @Transactional
-    public BooleanResult<FullTrainingError> addTrainingResult(UUID trainingId, UUID weaponId, String weaponName, UUID createdBy) {
+    public BooleanResult<FullTrainingError> addTrainingResult(
+            UUID trainingId,
+            UUID weaponId,
+            String weaponName,
+            UUID createdBy,
+            List<ShootResult> shootResults,
+            Distance distance) {
+
         var training = loadTraining(trainingId, createdBy);
-        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName);
+        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, shootResults, distance);
 
         var result = training.addResult(trainingResult);
         if (result.isSuccess()) {
