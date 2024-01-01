@@ -1,8 +1,10 @@
 package com.str.shootingresulttracker.domain.training;
 
 import com.str.shootingresulttracker.domain.infrastructure.DistanceConverter;
+import com.str.shootingresulttracker.domain.infrastructure.MoaFocusConverter;
 import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainEntity;
 import com.str.shootingresulttracker.domain.model.Distance;
+import com.str.shootingresulttracker.domain.training.moa.MoaFocus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -46,16 +48,35 @@ class TrainingResult extends AbstractBaseDomainEntity {
     @Column(name = "shots_results")
     private List<ShootResult> shotsResults;
 
-    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName, List<ShootResult> shotsResults, Distance distance) {
+    @Column(name = "focus_result")
+    @Convert(converter = MoaFocusConverter.class)
+    private MoaFocus focusResult;
+
+    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName, List<Integer> shotsResults, Distance shootingDistance) {
         super(clock, createdBy);
         requireNonNull(weaponId, "Weapon ID is required");
-        requiredNonEmpty(weaponName, "Weapon name");
-        requireNonNull(distance, "Training distance is required");
+        requiredNonEmpty(weaponName, "Weapon name is required");
+        requireNonNull(shootingDistance, "Training distance is required");
 
         this.weaponId = weaponId;
         this.weaponName = weaponName;
-        this.distance = distance;
+        this.distance = shootingDistance;
+        this.shotsResults = shotsResults == null ? List.of() : shotsResults.stream().map(ShootResult::simpleResult).toList();
+        this.focusResult = MoaFocus.zero();
+    }
+
+    public TrainingResult(Clock clock, UUID createdBy, UUID weaponId, String weaponName, Distance shootingDistance, List<ShootResult> shotsResults, ReferenceScale referenceScale) {
+        super(clock, createdBy);
+        requireNonNull(weaponId, "Weapon ID is required");
+        requiredNonEmpty(weaponName, "Weapon name is required");
+        requireNonNull(shootingDistance, "Training distance is required");
+        requireNonNull(referenceScale, "ReferenceScale is required");
+
+        this.weaponId = weaponId;
+        this.weaponName = weaponName;
+        this.distance = shootingDistance;
         this.shotsResults = shotsResults == null ? List.of() : List.copyOf(shotsResults);
+        this.focusResult = MoaFocus.calculate(distance, referenceScale, shotsResults);
     }
 
     public void changeWeapon(UUID weaponId, String weaponName) {

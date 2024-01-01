@@ -6,15 +6,15 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter
-public class DistanceConverter implements AttributeConverter<Distance, Float> {
+public class DistanceConverter implements AttributeConverter<Distance, Double> {
 
     @Override
-    public Float convertToDatabaseColumn(Distance attribute) {
-        return attribute.getMeters();
+    public Double convertToDatabaseColumn(Distance attribute) {
+        return attribute.getInMeters();
     }
 
     @Override
-    public Distance convertToEntityAttribute(Float dbData) {
+    public Distance convertToEntityAttribute(Double dbData) {
         return Distance.ofMeters(dbData);
     }
 }

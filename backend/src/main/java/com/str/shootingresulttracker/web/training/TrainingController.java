@@ -51,13 +51,36 @@ class TrainingController {
         return service.queryTrainingResults(trainingId, principal.getId());
     }
 
-    @PostMapping("/{trainingId}/result")
-    void createResult(@PathVariable UUID trainingId, @RequestBody TrainingResultCreateCommand command, @AuthenticationPrincipal UserDto principal) {
+    @PostMapping("/{trainingId}/result/full")
+    void createFullResult(@PathVariable UUID trainingId, @RequestBody FullTrainingResultCreateCommand command, @AuthenticationPrincipal UserDto principal) {
+        var weaponName = weaponService.queryWeaponName(command.weaponId(), principal.getId())
+                .orElseThrow(TrainingWeaponDoNotExistsWebException::new);
+
+        service.addFullTrainingResult(
+                        trainingId,
+                        command.weaponId(),
+                        weaponName,
+                        principal.getId(),
+                        command.shootResults(),
+                        command.referenceScale(),
+                        command.distance())
+                .orElseThrow(WebException::fromDomainError);
+    }
+
+
+    @PostMapping("/{trainingId}/result/simple")
+    void createSimpleResult(@PathVariable UUID trainingId, @RequestBody SimpleTrainingResultCreateCommand command, @AuthenticationPrincipal UserDto principal) {
 
         var weaponName = weaponService.queryWeaponName(command.weaponId(), principal.getId())
                 .orElseThrow(TrainingWeaponDoNotExistsWebException::new);
 
-        service.addTrainingResult(trainingId, command.weaponId(), weaponName, principal.getId(), command.shootResults(), command.distance())
+        service.addSimpleTrainingResult(
+                        trainingId,
+                        command.weaponId(),
+                        weaponName,
+                        principal.getId(),
+                        command.shootResults(),
+                        command.distance())
                 .orElseThrow(WebException::fromDomainError);
     }
 

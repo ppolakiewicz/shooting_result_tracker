@@ -33,7 +33,7 @@ class TrainingServiceIT extends AbstractIntegrationTest {
         var weaponId = UUID.randomUUID();
         var weaponName = "Test weapon";
 
-        var result = service.addTrainingResult(
+        var result = service.addSimpleTrainingResult(
                 trainingId.getValue(),
                 weaponId,
                 weaponName,

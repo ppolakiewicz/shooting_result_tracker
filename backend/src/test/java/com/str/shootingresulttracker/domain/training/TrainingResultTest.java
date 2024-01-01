@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.UUID;
 
+import static com.str.shootingresulttracker.domain.training.ShootResult.fullResult;
 import static java.util.List.of;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,12 +59,12 @@ class TrainingResultTest extends AbstractUnitTest {
 
         //and
         List<ShootResult> firstShotResults = of(
-                new ShootResult(1, new BulletHole(0, 0, 2)),
-                new ShootResult(2, new BulletHole(2, 2, 2))
+                fullResult(1, new BulletHole(0, 0, 2)),
+                fullResult(2, new BulletHole(2, 2, 2))
         );
         List<ShootResult> secondShotResults = of(
-                new ShootResult(10, new BulletHole(100, 100, 2)),
-                new ShootResult(10, new BulletHole(99, 99, 2))
+                fullResult(10, new BulletHole(100, 100, 2)),
+                fullResult(10, new BulletHole(99, 99, 2))
         );
 
         //expect

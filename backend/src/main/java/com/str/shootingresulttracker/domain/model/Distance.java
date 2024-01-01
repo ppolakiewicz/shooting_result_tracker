@@ -1,21 +1,23 @@
 package com.str.shootingresulttracker.domain.model;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Distance {
 
-    private final float meters;
+    private final double meters;
 
-    private Distance(float meters) {
+    private Distance(double meters) {
         this.meters = meters;
     }
 
-    public static Distance ofMeters(float meters) {
+    public static Distance ofMeters(double meters) {
         return new Distance(meters);
+    }
+
+    public double getInMeters() {
+        return meters;
     }
 
 }

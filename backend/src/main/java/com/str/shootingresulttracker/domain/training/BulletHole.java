@@ -1,5 +1,7 @@
 package com.str.shootingresulttracker.domain.training;
 
+import com.str.shootingresulttracker.domain.kernel.Circle;
+import com.str.shootingresulttracker.domain.kernel.Point;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,18 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class BulletHole {
 
-    private final Point center;
-    private final float radius;
+    private final Circle circle;
 
-    public BulletHole(int x, int y, float radius) {
-        this.center = new Point(x, y);
-        this.radius = radius;
+    public BulletHole(int x, int y, double radius) {
+        this.circle = new Circle(new Point(x, y), radius);
     }
 
-    public record Point(
-            int x,
-            int y
-    ) {
+    public Circle getAsCircle() {
+        return circle;
     }
 
 }

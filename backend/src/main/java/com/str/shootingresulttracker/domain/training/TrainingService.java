@@ -46,16 +46,36 @@ public class TrainingService {
     }
 
     @Transactional
-    public BooleanResult<FullTrainingError> addTrainingResult(
+    public BooleanResult<FullTrainingError> addSimpleTrainingResult(
+            UUID trainingId,
+            UUID weaponId,
+            String weaponName,
+            UUID createdBy,
+            List<Integer> shootResults,
+            Distance distance) {
+
+        var training = loadTraining(trainingId, createdBy);
+        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, shootResults, distance);
+
+        var result = training.addResult(trainingResult);
+        if (result.isSuccess()) {
+            repository.save(training);
+        }
+        return result;
+    }
+
+    @Transactional
+    public BooleanResult<FullTrainingError> addFullTrainingResult(
             UUID trainingId,
             UUID weaponId,
             String weaponName,
             UUID createdBy,
             List<ShootResult> shootResults,
+            ReferenceScale referenceScale,
             Distance distance) {
 
         var training = loadTraining(trainingId, createdBy);
-        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, shootResults, distance);
+        var trainingResult = new TrainingResult(clock, createdBy, weaponId, weaponName, distance, shootResults, referenceScale);
 
         var result = training.addResult(trainingResult);
         if (result.isSuccess()) {
