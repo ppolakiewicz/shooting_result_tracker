@@ -4,7 +4,7 @@ import com.str.shootingresulttracker.domain.infrastructure.DistanceConverter;
 import com.str.shootingresulttracker.domain.infrastructure.MoaFocusConverter;
 import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainEntity;
 import com.str.shootingresulttracker.domain.model.Distance;
-import com.str.shootingresulttracker.domain.training.moa.MoaFocus;
+import com.str.shootingresulttracker.domain.training.focus.MoaFocus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;

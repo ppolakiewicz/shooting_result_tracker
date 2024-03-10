@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.domain.infrastructure;
 
-import com.str.shootingresulttracker.domain.training.moa.MoaFocus;
+import com.str.shootingresulttracker.domain.training.focus.MoaFocus;
 import jakarta.persistence.AttributeConverter;
 
 public class MoaFocusConverter implements AttributeConverter<MoaFocus, Double> {

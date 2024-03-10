@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.training.moa;
+package com.str.shootingresulttracker.domain.training.focus;
 
 import com.str.shootingresulttracker.domain.model.Distance;
 import com.str.shootingresulttracker.domain.training.BulletHole;

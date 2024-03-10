@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.training.moa;
+package com.str.shootingresulttracker.domain.training.focus;
 
 import com.str.shootingresulttracker.domain.kernel.Circle;
 import com.str.shootingresulttracker.domain.model.Distance;
@@ -37,7 +37,7 @@ public class MoaFocus {
         requireNonNull(shootResults, "Shoot results can not be empty");
 
         if (shootResults.isEmpty()) {
-            return new MoaFocus(0d);
+            return zero();
         }
 
         var shootsAsCircles = shootResults.stream()
