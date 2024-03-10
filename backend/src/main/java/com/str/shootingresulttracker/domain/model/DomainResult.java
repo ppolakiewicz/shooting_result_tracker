@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.kernel;
+package com.str.shootingresulttracker.domain.model;
 
 public class DomainResult<V> extends Result<V, AbstractBaseDomainError> {
 

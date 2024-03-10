@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.kernel;
+package com.str.shootingresulttracker.domain.model;
 
 import java.util.Optional;
 import java.util.function.Consumer;

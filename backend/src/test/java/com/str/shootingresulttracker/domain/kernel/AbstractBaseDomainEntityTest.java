@@ -1,6 +1,7 @@
 package com.str.shootingresulttracker.domain.kernel;
 
 import com.str.shootingresulttracker.core.AbstractUnitTest;
+import com.str.shootingresulttracker.domain.model.AbstractBaseDomainEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

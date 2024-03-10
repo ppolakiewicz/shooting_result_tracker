@@ -2,7 +2,7 @@ package com.str.shootingresulttracker.domain.training;
 
 import com.str.shootingresulttracker.domain.infrastructure.DistanceConverter;
 import com.str.shootingresulttracker.domain.infrastructure.MoaFocusConverter;
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainEntity;
+import com.str.shootingresulttracker.domain.model.AbstractBaseDomainEntity;
 import com.str.shootingresulttracker.domain.model.Distance;
 import com.str.shootingresulttracker.domain.training.focus.MoaFocus;
 import jakarta.persistence.*;

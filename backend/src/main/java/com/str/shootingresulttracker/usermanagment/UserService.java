@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.usermanagment;
 
-import com.str.shootingresulttracker.domain.kernel.DomainResult;
+import com.str.shootingresulttracker.domain.model.DomainResult;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker.web.training;
 
-import com.str.shootingresulttracker.domain.kernel.DomainResult;
 import com.str.shootingresulttracker.domain.magazine.WeaponService;
+import com.str.shootingresulttracker.domain.model.DomainResult;
 import com.str.shootingresulttracker.domain.training.TrainingDto;
 import com.str.shootingresulttracker.domain.training.TrainingResultDto;
 import com.str.shootingresulttracker.domain.training.TrainingService;

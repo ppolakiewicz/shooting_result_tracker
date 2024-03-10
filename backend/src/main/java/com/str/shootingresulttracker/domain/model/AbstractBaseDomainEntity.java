@@ -1,4 +1,4 @@
-package com.str.shootingresulttracker.domain.kernel;
+package com.str.shootingresulttracker.domain.model;
 
 import com.str.shootingresulttracker.core.AbstractBaseEntity;
 import jakarta.persistence.Column;

@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker.domain.training;
 
-import com.str.shootingresulttracker.domain.kernel.Circle;
-import com.str.shootingresulttracker.domain.kernel.Point;
+import com.str.shootingresulttracker.domain.model.Circle;
+import com.str.shootingresulttracker.domain.model.Point;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

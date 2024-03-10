@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.domain.training.focus;
 
-import com.str.shootingresulttracker.domain.kernel.Circle;
+import com.str.shootingresulttracker.domain.model.Circle;
 import com.str.shootingresulttracker.domain.model.Distance;
 import com.str.shootingresulttracker.domain.training.ReferenceScale;
 import com.str.shootingresulttracker.domain.training.ShootResult;

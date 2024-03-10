@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.domain.magazine;
 
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainEntity;
+import com.str.shootingresulttracker.domain.model.AbstractBaseDomainEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;

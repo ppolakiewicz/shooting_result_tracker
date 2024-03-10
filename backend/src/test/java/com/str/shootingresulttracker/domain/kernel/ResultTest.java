@@ -1,5 +1,6 @@
 package com.str.shootingresulttracker.domain.kernel;
 
+import com.str.shootingresulttracker.domain.model.Result;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

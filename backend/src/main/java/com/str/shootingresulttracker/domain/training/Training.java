@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker.domain.training;
 
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseAggregate;
-import com.str.shootingresulttracker.domain.kernel.BooleanResult;
+import com.str.shootingresulttracker.domain.model.AbstractBaseAggregate;
+import com.str.shootingresulttracker.domain.model.BooleanResult;
 import com.str.shootingresulttracker.domain.training.error.FullTrainingError;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

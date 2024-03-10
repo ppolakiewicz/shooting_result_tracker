@@ -1,11 +1,11 @@
 package com.str.shootingresulttracker.domain.magazine;
 
-import com.str.shootingresulttracker.domain.kernel.BooleanResult;
-import com.str.shootingresulttracker.domain.kernel.DomainResult;
-import com.str.shootingresulttracker.domain.kernel.EntityDoNotExistsException;
 import com.str.shootingresulttracker.domain.magazine.error.FullMagazineError;
 import com.str.shootingresulttracker.domain.magazine.error.MagazineWithGivenNameExistsError;
 import com.str.shootingresulttracker.domain.magazine.error.MaximumNumberOfMagazines;
+import com.str.shootingresulttracker.domain.model.BooleanResult;
+import com.str.shootingresulttracker.domain.model.DomainResult;
+import com.str.shootingresulttracker.domain.model.EntityDoNotExistsException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

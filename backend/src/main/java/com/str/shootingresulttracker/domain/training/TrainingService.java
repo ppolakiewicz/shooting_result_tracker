@@ -1,9 +1,9 @@
 package com.str.shootingresulttracker.domain.training;
 
-import com.str.shootingresulttracker.domain.kernel.BooleanResult;
-import com.str.shootingresulttracker.domain.kernel.DomainResult;
-import com.str.shootingresulttracker.domain.kernel.EntityDoNotExistsException;
+import com.str.shootingresulttracker.domain.model.BooleanResult;
 import com.str.shootingresulttracker.domain.model.Distance;
+import com.str.shootingresulttracker.domain.model.DomainResult;
+import com.str.shootingresulttracker.domain.model.EntityDoNotExistsException;
 import com.str.shootingresulttracker.domain.training.error.FullTrainingError;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

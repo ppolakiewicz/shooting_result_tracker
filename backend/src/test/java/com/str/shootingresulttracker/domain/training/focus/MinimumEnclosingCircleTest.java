@@ -1,7 +1,7 @@
 package com.str.shootingresulttracker.domain.training.focus;
 
-import com.str.shootingresulttracker.domain.kernel.Circle;
-import com.str.shootingresulttracker.domain.kernel.Point;
+import com.str.shootingresulttracker.domain.model.Circle;
+import com.str.shootingresulttracker.domain.model.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

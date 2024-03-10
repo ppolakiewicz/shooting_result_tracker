@@ -1,9 +1,9 @@
 package com.str.shootingresulttracker.domain.magazine;
 
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseAggregate;
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainError;
-import com.str.shootingresulttracker.domain.kernel.BooleanResult;
 import com.str.shootingresulttracker.domain.magazine.error.FullMagazineError;
+import com.str.shootingresulttracker.domain.model.AbstractBaseAggregate;
+import com.str.shootingresulttracker.domain.model.AbstractBaseDomainError;
+import com.str.shootingresulttracker.domain.model.BooleanResult;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;

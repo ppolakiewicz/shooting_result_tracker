@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.web.kernel;
 
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainError;
+import com.str.shootingresulttracker.domain.model.AbstractBaseDomainError;
 
 public class WebException extends RuntimeException{
 

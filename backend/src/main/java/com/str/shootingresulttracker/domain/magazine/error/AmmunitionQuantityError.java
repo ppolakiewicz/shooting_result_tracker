@@ -1,6 +1,6 @@
 package com.str.shootingresulttracker.domain.magazine.error;
 
-import com.str.shootingresulttracker.domain.kernel.AbstractBaseDomainError;
+import com.str.shootingresulttracker.domain.model.AbstractBaseDomainError;
 
 public class AmmunitionQuantityError extends AbstractBaseDomainError {
 
